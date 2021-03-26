@@ -10,7 +10,19 @@ import java.util.List;
 public class PositionRepo extends Repo {
 
     /**
-     * Truy vấn tất cả {@code Position}
+     * Thêm một {@code Position} mới
+     * @param position {@code Position} được thêm vào
+     */
+    public void create(Position position) {
+        Session s = database.openSession();
+        Transaction t = s.beginTransaction();
+        s.persist(position);
+        t.commit();
+        s.close();
+    }
+
+    /**
+     * Đọc tất cả {@code Position}
      * @return danh sách tất cả các {@code Position}, danh sách rỗng nếu như bảng không có dữ liệu
      */
     public List<Position> getAll() {
@@ -24,7 +36,7 @@ public class PositionRepo extends Repo {
     }
 
     /**
-     * Truy vấn {@code Position} bằng {@code id}
+     * Đọc {@code Position} bằng {@code id}
      * @param id id truy vấn
      * @return {@code Position} với id đã cho, null nếu id đã cho không tồn tại
      */
