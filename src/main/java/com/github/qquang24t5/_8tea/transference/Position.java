@@ -21,11 +21,11 @@ public class Position {
     @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "position")
+    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Employee> employees;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "Permission_Position",
             joinColumns = {@JoinColumn(name = "position")},
