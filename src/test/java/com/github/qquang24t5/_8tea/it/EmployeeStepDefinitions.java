@@ -1,19 +1,16 @@
 package com.github.qquang24t5._8tea.it;
 
-import static org.assertj.core.api.Assertions.*;
-
-import com.github.qquang24t5._8tea.persistence.EmployeeDatastore;
-import com.github.qquang24t5._8tea.transference.Employee;
+import com.github.qquang24t5._8tea.persistence.EmployeeRepo;
 import io.cucumber.java.vi.Biết;
 import io.cucumber.java.vi.Khi;
 import io.cucumber.java.vi.Thì;
 
 public class EmployeeStepDefinitions {
 
-    private EmployeeDatastore employeeDatastore;
+    private EmployeeRepo employeeRepo;
 
     public EmployeeStepDefinitions() {
-        employeeDatastore = EmployeeDatastore.getInstance();
+        employeeRepo = EmployeeRepo.getInstance();
     }
 
     @Biết("tài khoản với số điện thoại {string} đã tồn tại trong hệ thống")
