@@ -7,18 +7,18 @@ import org.hibernate.Transaction;
 import javax.persistence.Query;
 import java.util.List;
 
-public class EmployeeDatastore {
+public class EmployeeRepo {
 
-    private static EmployeeDatastore instance;
+    private static EmployeeRepo instance;
     private final Database database;
 
-    private EmployeeDatastore() {
+    private EmployeeRepo() {
         database = Database.getInstance();
     }
 
-    public static EmployeeDatastore getInstance() {
+    public static EmployeeRepo getInstance() {
         if (instance == null)
-            instance = new EmployeeDatastore();
+            instance = new EmployeeRepo();
         return instance;
     }
 
