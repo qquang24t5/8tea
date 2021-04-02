@@ -5,13 +5,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Data
 @Builder
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -27,21 +25,17 @@ public class Employee {
     @Column(unique = true, nullable = false)
     private String passwordHash;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Position position;
+
     private String name;
 
     private LocalDate dateOfBirth;
 
-    enum Gender { MALE, FEMALE }
+    public enum Gender { MALE, FEMALE }
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "Employee_Permission",
-            joinColumns = { @JoinColumn(name = "EmployeeId") },
-            inverseJoinColumns = { @JoinColumn(name = "PermissionId") }
-    )
-    @ToString.Exclude
-    private List<Permission> permissions;
-
+    @NotNull
+    private Boolean disabled;
 }
