@@ -12,9 +12,11 @@ import java.io.IOException;
 public class EightTeaApplication extends Application {
 
     private static Scene scene;
+    private static View currentView;
 
     @Override
     public void start(Stage stage) throws IOException {
+        currentView = View.LOGIN;
         scene = new Scene(loadFXML(View.LOGIN.fxml), 640, 480);
         stage.setScene(scene);
         stage.show();
@@ -25,7 +27,12 @@ public class EightTeaApplication extends Application {
     }
 
     public static void changeView(View view) throws IOException {
+        currentView = view;
         setRoot(view.fxml);
+    }
+
+    public static View getCurrentView() {
+        return currentView;
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
@@ -33,7 +40,7 @@ public class EightTeaApplication extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         launch();
     }
 
