@@ -7,24 +7,7 @@ import org.hibernate.Transaction;
 import javax.persistence.Query;
 import java.util.List;
 
-public class EmployeeRepo {
-
-    private static EmployeeRepo instance;
-    private final Database database;
-
-    private EmployeeRepo() {
-        database = Database.getInstance();
-    }
-
-    public static EmployeeRepo getInstance() {
-        if (instance == null)
-            instance = new EmployeeRepo();
-        return instance;
-    }
-
-    public static void autofill(Employee e) {
-        throw new UnsupportedOperationException();
-    }
+public class EmployeeRepo extends Repo {
 
     public void create(Employee e) {
         Session session = database.openSession();
