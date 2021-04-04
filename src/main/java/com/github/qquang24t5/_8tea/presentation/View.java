@@ -7,7 +7,7 @@ public enum View {
     CREATING_NEW_ACCOUNT("CreatingNewAccount");
 
     public String fxml;
-    private View(String fxml) {
+    View(String fxml) {
         this.fxml = "presentation/views/" + fxml;
     }
 

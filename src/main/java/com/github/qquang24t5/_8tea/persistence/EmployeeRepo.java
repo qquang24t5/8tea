@@ -9,6 +9,17 @@ import java.util.List;
 
 public class EmployeeRepo extends Repo {
 
+    public EmployeeRepo() {
+
+        Employee admin = Employee.builder()
+                .mobile("0123456789")
+                .passwordHash("eb11701dca27839ff4553211814a7cf0")
+                .disabled(false)
+                .build();
+
+        create(admin);
+    }
+
     public void create(Employee e) {
         Session session = database.openSession();
         Transaction transaction = session.beginTransaction();

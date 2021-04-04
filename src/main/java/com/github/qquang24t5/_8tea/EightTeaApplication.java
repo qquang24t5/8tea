@@ -20,8 +20,12 @@ public class EightTeaApplication extends Application {
         stage.show();
     }
 
-    public static void setRoot(String fxml) throws IOException {
+    private static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+    }
+
+    public static void changeView(View view) throws IOException {
+        setRoot(view.fxml);
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

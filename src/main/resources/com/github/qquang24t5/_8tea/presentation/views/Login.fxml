@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,44 +12,46 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.qquang24t5._8tea.presentation.controllers.LoginController">
+<AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.qquang24t5._8tea.presentation.LoginController">
    <children>
       <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Group>
                <children>
-                    <ImageView fitHeight="101.0" fitWidth="185.0" layoutX="153.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="101.0" fitWidth="185.0" layoutX="153.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@../img/logo.png" />
                         </image>
                     </ImageView>
-                    <Label layoutX="188.0" layoutY="115.0" text="ĐĂNG NHẬP" textAlignment="CENTER">
-                        <font>
-                            <Font name="System Bold" size="18.0" />
-                        </font>
-                    </Label>
-                  <GridPane layoutX="44.0" layoutY="142.0" prefHeight="57.0" prefWidth="396.0">
+                  <Label fx:id="lblNotification" alignment="CENTER" layoutX="47.0" layoutY="80.0" prefHeight="65.0" prefWidth="395.0" textAlignment="CENTER">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </Label>
+                  <GridPane layoutX="48.0" layoutY="162.0" prefHeight="73.0" prefWidth="396.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="77.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="315.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="41.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="54.0" minHeight="0.0" prefHeight="54.0" vgrow="ALWAYS" />
+                      <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                           <Label text="Số điện thoại" />
-                          <TextField fx:id="mobile" prefHeight="25.0" prefWidth="315.0" GridPane.columnIndex="1" />
+                          <TextField fx:id="tfdMobile" prefHeight="25.0" prefWidth="315.0" GridPane.columnIndex="1" />
                           <Label text="Mật khẩu" GridPane.rowIndex="1" />
-                          <TextField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                          <TextField fx:id="pfdPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                    <Button fx:id="login" layoutX="44.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#onLoginBtnClicked" prefHeight="25.0" prefWidth="396.0" text="Đăng nhập " />
                </children>
             </Group>
-            <Label fx:id="notification" />
+              <Button fx:id="btnLogin" mnemonicParsing="false" onMouseClicked="#btnLogin_onMouseClicked" prefHeight="25.0" prefWidth="318.0" text="Đăng nhập ">
+               <VBox.margin>
+                  <Insets top="19.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>
