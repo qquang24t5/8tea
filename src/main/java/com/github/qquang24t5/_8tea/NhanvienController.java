@@ -184,7 +184,7 @@ public class NhanvienController implements Initializable {
         RadioButton gt = (RadioButton) gioitinh.getSelectedToggle();
         nv.setGioiTinh(gt.getText());
       
-        if(!nv.getSDT().matches("0[0-9]{9}"))
+        if(!nv.getSDT().matches("0[0-9]{9,10}"))
         {
             ers.add("Số điện thoại không hợp lệ");
         }

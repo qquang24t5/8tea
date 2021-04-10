@@ -38,7 +38,7 @@ public class BUS_ChucNang {
         return list;
     }
     
-    public boolean ThemCV(ChucNang chucnang) {
+    public boolean ThemCN(ChucNang chucnang) {
         String sql = "insert into ChucNang(MaCN,TenCN) values(?,?)";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
@@ -71,6 +71,27 @@ public class BUS_ChucNang {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();
             return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean checkTenCN(String check)
+    {
+         String sql = "select * from CHUCNANG where TenCN ='"+check+"'";
+       
+        try {
+            
+          
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                 return true;
+     
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

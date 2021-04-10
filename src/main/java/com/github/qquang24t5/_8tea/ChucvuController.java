@@ -6,18 +6,25 @@
 package com.github.qquang24t5._8tea;
 
 import BUS.BUS_ChucNang;
+import BUS.BUS_ChucVu;
 import DTO.ChucNang;
+import DTO.ChucVu;
 import com.github.qquang24t5._8tea.EightTeaApplication;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
@@ -30,6 +37,13 @@ public class ChucvuController implements Initializable {
 
     @FXML
     private VBox vbox;
+    @FXML
+    private TableView<ChucVu> tblChucvu;
+    
+    @FXML
+    private TableColumn<ChucVu, String> colMaCV;
+    @FXML
+    private TableColumn<ChucVu, String> colTenCV;
 
     /**
      * Initializes the controller class.
@@ -38,7 +52,7 @@ public class ChucvuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setDSQuyen();
-        
+        setTableCV();
     }    
 
 
@@ -72,6 +86,22 @@ public class ChucvuController implements Initializable {
             i++;
         }
         vbox.setSpacing(10);
+    }
+    
+    
+    public void setTableCV()
+    {
+        tblChucvu.getItems().removeAll();
+        ObservableList<ChucVu> li = FXCollections.observableArrayList();
+        ArrayList<ChucVu> listcv = new BUS_ChucVu().getListCV();
+        for(ChucVu cv:listcv)
+        {
+            li.add(cv);
+        }
+        colMaCV.setCellValueFactory(new PropertyValueFactory<ChucVu, String>("MaCV"));
+        colTenCV.setCellValueFactory(new PropertyValueFactory<ChucVu, String>("TenCV"));
+        
+        tblChucvu.setItems(li);
     }
     
 }
