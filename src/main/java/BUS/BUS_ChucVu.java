@@ -18,7 +18,7 @@ public class BUS_ChucVu {
     DAO dao = new DAO();
     public ArrayList<ChucVu> getListCV(){
         ArrayList<ChucVu> list = new ArrayList<>();
-        String sql = "select * from ChucVu";
+        String sql = "select * from ChucVu where MaCV<>'TT'";
         
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
@@ -66,7 +66,7 @@ public class BUS_ChucVu {
     }
     
     public boolean XoaCV(String MaCV)   {
-        String sql = "delete * from ChucVu where MaCV = '"+MaCV+"'";
+        String sql = "delete from ChucVu where MaCV = '"+MaCV+"'";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();
@@ -76,6 +76,7 @@ public class BUS_ChucVu {
         }
         return false;
     }
+
     public String tenCV(String MaCV)   {
         String sql = "select TenCV from chucvu where MaCV = '"+MaCV+"'";
         try {
@@ -89,7 +90,7 @@ public class BUS_ChucVu {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "ko co chuc vu";
+        return "Chưa có";
     }
     public String maCV(String tencv)   {
         String sql = "select MaCV from chucvu where TenCV = N'"+tencv+"'";
@@ -105,5 +106,16 @@ public class BUS_ChucVu {
             e.printStackTrace();
         }
         return "ko tim thay";
+    }
+    public boolean setTrongCVNV(String MaCV)   {
+        String sql = "update nhanvien set MaCV ='TT' where MaCV='"+MaCV+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

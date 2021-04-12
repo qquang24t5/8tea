@@ -17,19 +17,17 @@ import java.sql.ResultSet;
 public class BUS_Quyen_ChucNang {
     DAO dao = new DAO();
     
-    public ArrayList<Quyen_ChucNang> getListQCN(){
-        ArrayList<Quyen_ChucNang> list = new ArrayList<>();
-        String sql = "select * from Quyen_ChucNang";
+    public ArrayList<String> getListQCN(String MaCV){
+        ArrayList<String> list = new ArrayList<>();
+        String sql = "select * from Quyen_ChucNang where MaCV='"+MaCV+"'";
         
         try {
             PreparedStatement ps  = dao.conn().prepareStatement(sql);
             ResultSet rs  =  ps.executeQuery();
             while(rs.next())
             {
-                Quyen_ChucNang qcn = new Quyen_ChucNang();
-                qcn.setMaCN(rs.getString("MaCN"));
-                qcn.setMaCV(rs.getString("MaCV"));
-                list.add(qcn);
+                
+                list.add(rs.getString("MaCN"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,7 +65,19 @@ public class BUS_Quyen_ChucNang {
     
     public boolean XoaQCN(String MaCV)
     {
-        String sql = "delete * from Quyen_ChucNang";
+        String sql = "delete from Quyen_ChucNang where MaCV='"+MaCV+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ps.executeUpdate() ;
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+     public boolean XoaDSCN(String MaCN)
+    {
+        String sql = "delete from Quyen_ChucNang where MaCN='"+MaCN+"'";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate() ;

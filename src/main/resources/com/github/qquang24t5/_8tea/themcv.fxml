@@ -12,62 +12,68 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.qquang24t5._8tea.ThemcvController">
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.qquang24t5._8tea.ThemcvController">
    <children>
       <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#backFormCV" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons8_back_52px.png" />
          </image>
       </ImageView>
-      <TextField layoutX="86.0" layoutY="83.0" prefHeight="26.0" prefWidth="227.0" />
-      <Label layoutX="84.0" layoutY="54.0" text="Nhập tên chức vụ mới">
+      <TextField fx:id="txtTenCV" layoutX="264.0" layoutY="79.0" prefHeight="26.0" prefWidth="127.0" />
+      <Label layoutX="263.0" layoutY="53.0" text="Tên chức vụ">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="86.0" layoutY="121.0" text="Cấp quyền">
+      <Label layoutX="100.0" layoutY="114.0" text="Cấp quyền">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <VBox layoutX="84.0" layoutY="144.0" prefHeight="269.0" prefWidth="227.0" />
-      <Button layoutX="86.0" layoutY="424.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Thêm" />
-      <Line endX="-6.66668701171875" endY="455.0000305175781" layoutX="354.0" layoutY="29.0" startX="-6.66668701171875" startY="-16.333328247070312" />
-      <Label layoutX="376.0" layoutY="212.0" text="Danh sách quyền">
+      <VBox fx:id="vbox" layoutX="98.0" layoutY="140.0" prefHeight="255.0" prefWidth="264.0" />
+      <Button layoutX="105.0" layoutY="395.0" mnemonicParsing="false" onAction="#themCV" prefHeight="25.0" prefWidth="61.0" text="Thêm" />
+      <Line endX="-6.66668701171875" endY="467.0" layoutX="447.0" layoutY="29.0" startX="-6.66668701171875" startY="-16.333328247070312" />
+      <Label layoutX="473.0" layoutY="151.0" text="Danh sách quyền">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="375.0" layoutY="107.0" text="Tên quyền">
+      <Label layoutX="663.0" layoutY="47.0" text="Tên quyền">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtTenQuyen" layoutX="377.0" layoutY="129.0" prefHeight="26.0" prefWidth="170.0" />
-      <Button fx:id="btnThem" layoutX="375.0" layoutY="170.0" mnemonicParsing="false" onAction="#themQuyen" prefHeight="25.0" prefWidth="61.0" text="Thêm" />
-      <TableView fx:id="tblQuyen" layoutX="376.0" layoutY="243.0" prefHeight="248.0" prefWidth="447.0">
+      <TextField fx:id="txtTenQuyen" layoutX="664.0" layoutY="73.0" prefHeight="26.0" prefWidth="170.0" />
+      <Button fx:id="btnThem" layoutX="472.0" layoutY="109.0" mnemonicParsing="false" onAction="#themQuyen" prefHeight="25.0" prefWidth="61.0" text="Thêm" />
+      <TableView fx:id="tblQuyen" layoutX="473.0" layoutY="183.0" onMouseClicked="#getDuLieu" prefHeight="312.0" prefWidth="362.0">
         <columns>
-          <TableColumn fx:id="colMaQuyen" prefWidth="75.0" text="Mã quyền" />
-          <TableColumn fx:id="colTenQuyen" prefWidth="170.0" text="Tên quyền" />
+          <TableColumn fx:id="colMaQuyen" prefWidth="111.0" text="Mã quyền" />
+          <TableColumn fx:id="colTenQuyen" prefWidth="241.0" text="Tên quyền" />
         </columns>
       </TableView>
-      <Button layoutX="444.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Sửa" />
-      <Button layoutX="510.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Xóa" />
-      <Label layoutX="376.0" layoutY="14.0" text="QUẢN LÝ QUYỀN" textFill="#1252ff">
+      <Button layoutX="541.0" layoutY="109.0" mnemonicParsing="false" onAction="#suaQuyen" prefHeight="25.0" prefWidth="61.0" text="Sửa" />
+      <Button layoutX="607.0" layoutY="109.0" mnemonicParsing="false" onAction="#xoaCN" prefHeight="25.0" prefWidth="61.0" text="Xóa" />
+      <Label layoutX="566.0" layoutY="12.0" text="QUẢN LÝ QUYỀN" textFill="#1252ff">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Label layoutX="86.0" layoutY="14.0" text="THÊM CHỨC VỤ" textFill="#1252ff">
+      <Label layoutX="155.0" layoutY="14.0" text="THÊM CHỨC VỤ" textFill="#1252ff">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Label layoutX="376.0" layoutY="56.0" text="Mã quyền">
+      <Label layoutX="472.0" layoutY="47.0" text="Mã quyền">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtMaQuyen" layoutX="376.0" layoutY="76.0" prefHeight="26.0" prefWidth="170.0" />
+      <TextField fx:id="txtMaQuyen" layoutX="471.0" layoutY="73.0" prefHeight="26.0" prefWidth="170.0" />
+      <TextField fx:id="txtMaCV" layoutX="97.0" layoutY="79.0" prefHeight="26.0" prefWidth="127.0" />
+      <Label layoutX="96.0" layoutY="53.0" text="Mã chức vụ">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

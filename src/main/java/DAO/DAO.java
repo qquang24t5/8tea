@@ -29,7 +29,7 @@ public class DAO {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/eitea","root","");
-            System.out.println("connect successfully!");
+//            System.out.println("connect successfully!");
         } catch (Exception ex) {
             System.out.println("connect failure!");
             ex.printStackTrace();
@@ -45,9 +45,8 @@ public class DAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                if(rs.getInt("TrangThai")==1)
-                    return rs.getString("MaNV");
-              
+                if(rs.getInt("TrangThai")==1) return rs.getString("MaNV");
+                else if(rs.getInt("TrangThai")==0) return "LOCK";
             }
        
         } catch (Exception e) {

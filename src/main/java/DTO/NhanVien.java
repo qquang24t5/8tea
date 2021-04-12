@@ -91,6 +91,10 @@ public class NhanVien {
     public void setTrangThai(String TrangThai) {
         this.TrangThai = TrangThai;
     }
+
+    public void setMaNV(int value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

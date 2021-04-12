@@ -66,7 +66,7 @@ public class BUS_ChucNang {
     }
     
     public boolean XoaCN(String MaCN)   {
-        String sql = "delete * from ChucNang where MaCN = '"+MaCN+"'";
+        String sql = "delete from ChucNang where MaCN = '"+MaCN+"'";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();
@@ -96,5 +96,35 @@ public class BUS_ChucNang {
             e.printStackTrace();
         }
         return false;
+    }
+    public String maCN(String tencn)   {
+        String sql = "select MaCN from chucnang where TenCN = N'"+tencn+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                return rs.getString(1);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ko tim thay";
+    }
+     public String tenCN(String macn)   {
+        String sql = "select TenCN from chucnang where MaCN ='"+macn+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                return rs.getString("TenCN");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ko tim thay";
     }
 }

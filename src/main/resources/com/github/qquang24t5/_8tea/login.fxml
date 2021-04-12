@@ -8,10 +8,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="509.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.qquang24t5._8tea.LoginController">
    <children>
-      <Button fx:id="button" layoutX="359.0" layoutY="376.0" mnemonicParsing="false" onAction="#dangnhap" prefHeight="24.0" prefWidth="100.0" text="Đăng nhập" />
+      <Button fx:id="button" layoutX="359.0" layoutY="395.0" mnemonicParsing="false" onAction="#dangnhap" prefHeight="24.0" prefWidth="100.0" text="Đăng nhập" />
       <Label layoutX="290.0" layoutY="294.0" prefHeight="25.0" prefWidth="69.0" text="Tài khoản">
          <font>
             <Font size="14.0" />
@@ -34,5 +35,6 @@
             <Font size="27.0" />
          </font>
       </Label>
+      <Text fx:id="lbLoi" fill="RED" layoutX="291.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="320.0000047683716" />
    </children>
 </AnchorPane>

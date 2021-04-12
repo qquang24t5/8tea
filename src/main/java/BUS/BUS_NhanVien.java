@@ -162,8 +162,8 @@ public class BUS_NhanVien {
         }
         return nv;
     }
-    public boolean SuaNV(String MaNV , String HoTen ,int GioiTinh , String SDT , String NgaySinh ,String MaCV )  {
-        String sql = "UPDATE NhanVien set HoTen='"+HoTen+"' ,GioiTinh="+GioiTinh+",SDT='"+SDT+"',NgaySinh='"+NgaySinh+"',MaCV='"+MaCV+"' where MaNV='"+MaNV+"' ";
+    public boolean SuaNV(String MaNV , String HoTen ,int GioiTinh , String SDT , String NgaySinh ,String MaCV ,String TrangThai)  {
+        String sql = "UPDATE NhanVien set HoTen='"+HoTen+"' ,GioiTinh="+GioiTinh+",SDT='"+SDT+"',NgaySinh='"+NgaySinh+"',MaCV='"+MaCV+"',TrangThai='"+TrangThai+"' where MaNV='"+MaNV+"' ";
          try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();

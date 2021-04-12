@@ -6,8 +6,12 @@
 package com.github.qquang24t5._8tea;
 
 import BUS.BUS_ChucNang;
+import BUS.BUS_ChucVu;
+import BUS.BUS_Quyen_ChucNang;
 import DTO.
         ChucNang;
+import DTO.ChucVu;
+import DTO.Quyen_ChucNang;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,12 +22,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -44,6 +50,12 @@ public class ThemcvController implements Initializable {
     private TextField txtTenQuyen;
     @FXML
     private TextField txtMaQuyen;
+    @FXML
+    private VBox vbox;
+    @FXML
+    private TextField txtTenCV;
+    @FXML
+    private TextField txtMaCV;
 
     /**
      * Initializes the controller class.
@@ -52,6 +64,7 @@ public class ThemcvController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setTableChucNang();
+        setDSQuyen();
     }    
 
     @FXML
@@ -88,6 +101,12 @@ public class ThemcvController implements Initializable {
         ChucNang cn = new ChucNang();
         cn.setMaCN(txtMaQuyen.getText());
         cn.setTenCN(txtTenQuyen.getText());
+        if(new BUS_ChucNang().checkTenCN(cn.getTenCN()))
+        {
+            EightTeaApplication.alertInf("Tên quyền bị trùng !");
+        }
+        else
+        {
         if(new BUS_ChucNang().ThemCN(cn))
             {
                 EightTeaApplication.alertInf("Đã thêm quyền chức năng mới");
@@ -95,10 +114,126 @@ public class ThemcvController implements Initializable {
             }
             else
             {
-                EightTeaApplication.alertInf("Lỗi hệ thống, vui lòng thử lại sau !");
+                EightTeaApplication.alertInf("Mã quyền bị trùng !");
             }
                 
             }
         }
-    
+    }
+     ArrayList<ChucNang> listcn = new BUS_ChucNang().getListCN();
+        CheckBox[] list = new CheckBox[listcn.size()];
+        
+    public void setDSQuyen()
+    {
+       
+        int i = 0;
+        for(ChucNang cn : listcn)
+        {
+            list[i] = new CheckBox();
+            list[i].setText(cn.getTenCN());
+            vbox.getChildren().add(list[i]);
+            i++;
+        }
+        vbox.setSpacing(10);
+    }
+
+    @FXML
+    private void themCV(ActionEvent event) {
+        String ma = txtMaCV.getText();
+        String ten = txtTenCV.getText();
+        if(ma.isEmpty()||ten.isEmpty())
+        {
+            EightTeaApplication.alertInf("Hãy nhập đầy đủ thông tin trước");
+        }
+        else
+        {
+        BUS_ChucNang buscn = new BUS_ChucNang();
+        BUS_Quyen_ChucNang qcn = new BUS_Quyen_ChucNang();
+        
+        
+        ArrayList<String> dsmacn = new ArrayList<>();
+        for(int i=0;i<listcn.size();i++)
+        {
+            if(list[i].isSelected())
+            {
+                dsmacn.add(buscn.maCN(list[i].getText()));
+            }
+                
+        }
+        ChucVu vc = new ChucVu();
+        vc.setMaCV(ma);
+        vc.setTenCV(ten);
+        if(new BUS_ChucVu().ThemCV(vc))
+        for(String s : dsmacn)
+        {
+           
+            Quyen_ChucNang qc = new Quyen_ChucNang();
+            qc.setMaCV(ma);
+            qc.setMaCN(s);
+            if(qcn.ThemQCN(qc))
+            {
+                
+            }
+        }
+        EightTeaApplication.alertInf("Đã thêm chức vụ mới");
+        }
+    }
+
+    @FXML
+    private void getDuLieu(MouseEvent event) {
+         if(tblQuyen.getSelectionModel().getSelectedItem() != null)
+        {
+            ChucNang cn = tblQuyen.getSelectionModel().getSelectedItem();
+            txtMaQuyen.setText(cn.getMaCN());
+            txtTenQuyen.setText(cn.getTenCN());
+            txtMaQuyen.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void xoaCN(ActionEvent event) {
+        if(tblQuyen.getSelectionModel().getSelectedItem() == null)
+        {
+            EightTeaApplication.alertInf("Chọn dòng để thực hiện !");
+        }
+        else{
+            boolean xn = EightTeaApplication.alertConf("Bạn có chắc chắn muốn xóa ?");
+            if(xn == true)
+            {
+                ChucNang cn = tblQuyen.getSelectionModel().getSelectedItem();
+                if(new BUS_Quyen_ChucNang().XoaDSCN(cn.getMaCN()))
+                {
+                    new BUS_ChucNang().XoaCN(String.valueOf(cn.getMaCN()));
+                setTableChucNang();
+		txtMaQuyen.setText("");
+		txtTenQuyen.setText("");
+                EightTeaApplication.alertInf("Xóa thành công !");
+                }
+                
+            }
+        }
+    }
+
+    @FXML
+    private void suaQuyen(ActionEvent event) {
+         String tenQuyen = txtTenQuyen.getText();
+        if(tblQuyen.getSelectionModel().getSelectedItem() == null)
+        {
+            EightTeaApplication.alertInf("Chọn dòng để thực hiện !");
+        }
+        else{
+            boolean xn = EightTeaApplication.alertConf("Bạn có chắc chắn muốn sửa ?");
+            if(xn == true)
+            {
+                ChucNang cn = tblQuyen.getSelectionModel().getSelectedItem();
+                cn.setTenCN(String.valueOf(txtTenQuyen));
+                new BUS_ChucNang().SuaCN(String.valueOf(cn.getMaCN()), tenQuyen);
+                setTableChucNang();
+		txtMaQuyen.setText("");
+		txtTenQuyen.setText("");
+                txtMaQuyen.setDisable(false);
+                EightTeaApplication.alertInf("Sửa thành công !");
+            }
+        }
+    }
 }

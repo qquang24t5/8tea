@@ -7,6 +7,7 @@ package com.github.qquang24t5._8tea;
 
 import BUS.BUS_ChucNang;
 import BUS.BUS_ChucVu;
+import BUS.BUS_Quyen_ChucNang;
 import DTO.ChucNang;
 import DTO.ChucVu;
 import com.github.qquang24t5._8tea.EightTeaApplication;
@@ -39,7 +40,7 @@ public class ChucvuController implements Initializable {
     private VBox vbox;
     @FXML
     private TableView<ChucVu> tblChucvu;
-    
+
     @FXML
     private TableColumn<ChucVu, String> colMaCV;
     @FXML
@@ -53,55 +54,93 @@ public class ChucvuController implements Initializable {
         // TODO
         setDSQuyen();
         setTableCV();
-    }    
-
-
+    }
 
     @FXML
     private void backHome(MouseEvent event) throws IOException {
         EightTeaApplication.setRoot("home");
     }
 
-    @FXML
-    private void themQuyen(ActionEvent event) throws IOException {
-        EightTeaApplication.setRoot("themcv");
-    }
-
-    @FXML
-    private void suaQuyen(ActionEvent event) {
-    }
-
-    @FXML
-    private void xoaQuyen(ActionEvent event) {
-    }
-    public void setDSQuyen()
-    {
+    
         ArrayList<ChucNang> listcn = new BUS_ChucNang().getListCN();
         CheckBox[] list = new CheckBox[listcn.size()];
+    public void setDSQuyen() {
+       
         int i = 0;
-        for(ChucNang cn : listcn)
-        {
+        for (ChucNang cn : listcn) {
             list[i] = new CheckBox(cn.getTenCN());
             vbox.getChildren().add(list[i]);
             i++;
         }
         vbox.setSpacing(10);
     }
-    
-    
-    public void setTableCV()
-    {
+
+    public void setTableCV() {
         tblChucvu.getItems().removeAll();
         ObservableList<ChucVu> li = FXCollections.observableArrayList();
         ArrayList<ChucVu> listcv = new BUS_ChucVu().getListCV();
-        for(ChucVu cv:listcv)
-        {
+        for (ChucVu cv : listcv) {
             li.add(cv);
         }
         colMaCV.setCellValueFactory(new PropertyValueFactory<ChucVu, String>("MaCV"));
         colTenCV.setCellValueFactory(new PropertyValueFactory<ChucVu, String>("TenCV"));
-        
+
         tblChucvu.setItems(li);
     }
-    
+
+    @FXML
+    private void getDuLieu(MouseEvent event) {
+         for(int i=0;i<list.length;i++)
+            {
+                list[i].setSelected(false);
+            }
+        ChucVu cv = tblChucvu.getSelectionModel().getSelectedItem();
+        BUS_Quyen_ChucNang bqs = new BUS_Quyen_ChucNang();
+        ArrayList<String> listquyen = bqs.getListQCN(cv.getMaCV());
+        String sc="";
+        
+            for(int i=0;i<list.length;i++)
+            {
+                for(String s:listquyen)
+                {
+                    if(list[i].getText().equals(new BUS_ChucNang().tenCN(s)))
+                    {
+                        list[i].setSelected(true);
+                    }
+                }
+            }
+        
+        
+        
+       
+        
+    }
+
+    @FXML
+    private void themCV(ActionEvent event) throws IOException {
+         EightTeaApplication.setRoot("themcv");
+    }
+
+    @FXML
+    private void suaCV(ActionEvent event) {
+    }
+
+    @FXML
+    private void xoaCV(ActionEvent event) {
+        ChucVu cv = tblChucvu.getSelectionModel().getSelectedItem();
+        if (EightTeaApplication.alertConf("Bạn có chắc chắn muốn xóa chức vụ này ?")) {
+            if (new BUS_Quyen_ChucNang().XoaQCN(cv.getMaCV())) {
+                if(new BUS_ChucVu().setTrongCVNV(cv.getMaCV()))
+                {
+                    if (new BUS_ChucVu().XoaCV(cv.getMaCV())) {
+                    EightTeaApplication.alertInf("Đã xóa chức vụ");
+                    setTableCV();
+                }
+                }
+                
+            }
+
+        }
+    }
+
 }
