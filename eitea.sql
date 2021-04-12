@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2021 at 06:37 AM
+-- Generation Time: Apr 12, 2021 at 06:52 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -99,7 +99,8 @@ CREATE TABLE `chucvu` (
 
 INSERT INTO `chucvu` (`MACV`, `TENCV`) VALUES
 ('TN', 'Thu ngân'),
-('TP', 'Trưởng phòng');
+('TP', 'Trưởng phòng'),
+('TT', 'Trống');
 
 -- --------------------------------------------------------
 
@@ -180,11 +181,22 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`MANV`, `MACV`, `HOTEN`, `GIOITINH`, `SDT`, `NGAYSINH`, `MATKHAU`, `TRANGTHAI`) VALUES
-('231', 'TP', 'Tuan', '0', '0123456389', '23/09/2000', '123456', 1),
-('2313', 'TP', 'Tuan', '0', '0123456380', '23/09/2000', '123456789', 1),
+('231', 'TT', 'tuan', '0', '0123456389', '23/09/2000', '123456', 1),
+('2313', 'TP', 'Tuan', '0', '0934045700', '23/09/2000', '123456789', 1),
+('32131', 'TT', '444', '1', '0934021311', '22/04/1999', '123456789', 1),
+('321313', 'TT', 'laocong', '0', '0875765211', '08/04/1999', '123456789', 1),
+('60093690', 'TP', 'ramdon', '0', '0827817288', '13/03/1998', '123456789', 1),
 ('LMAO', 'TN', 'Truong Kute', '1', '113', '24/08/2000', 'darkdark', 1),
-('NV001', 'TN', 'ABC', '0', '0986457958', '12/04/2000', '123456789', 1),
-('siapa', 'TN', 'Trieu', '0', '0123456789', '27/02/2000', 'trieubaby', 0);
+('NV001', 'TT', 'ABC', '0', '0986457958', '12/04/2000', '123456789', 1),
+('NV20421514', 'TP', 'petruogkute', '0', '0975786211', '17/04/1997', '123456789', 1),
+('NV35569663', 'TP', 'tranducbo', '0', '0972877166', '18/04/1997', '123456789', 1),
+('NV43240710', 'TN', 'lololo', '0', '0927182311', '08/04/1998', '123456789', 1),
+('NV72837659', 'TP', 'trieugay', '1', '0617455322', '16/04/1998', '123456789', 2),
+('NV77434461', 'TP', 'dsada21', '0', '0982713133', '10/04/1997', '123456789', 1),
+('QQ123', 'TP', 'Quang', '0', '0907666555', '12/04/2000', '123456789', 1),
+('sdsa', 'TT', 'Linh', '1', '0934034231', '19/03/1998', '123456789', 1),
+('siapa', 'TN', 'Trieu', '0', '0123456789', '27/02/2000', 'trieubaby', 1),
+('tk12313', 'TT', 'kenny sang', '0', '0827124122', '10/04/1997', '123456789', 1);
 
 -- --------------------------------------------------------
 
@@ -400,24 +412,11 @@ ALTER TABLE `kho`
   ADD CONSTRAINT `kho_ibfk_2` FOREIGN KEY (`MANCC`) REFERENCES `nhacungcap` (`MANCC`);
 
 --
--- Constraints for table `nhanvien`
---
-ALTER TABLE `nhanvien`
-  ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`MACV`) REFERENCES `chucvu` (`MACV`);
-
---
 -- Constraints for table `phieunhap`
 --
 ALTER TABLE `phieunhap`
   ADD CONSTRAINT `phieunhap_ibfk_1` FOREIGN KEY (`MANV`) REFERENCES `nhanvien` (`MANV`),
   ADD CONSTRAINT `phieunhap_ibfk_2` FOREIGN KEY (`MANCC`) REFERENCES `nhacungcap` (`MANCC`);
-
---
--- Constraints for table `quyen_chucnang`
---
-ALTER TABLE `quyen_chucnang`
-  ADD CONSTRAINT `quyen_chucnang_ibfk_1` FOREIGN KEY (`MACN`) REFERENCES `chucnang` (`MACN`),
-  ADD CONSTRAINT `quyen_chucnang_ibfk_2` FOREIGN KEY (`MACV`) REFERENCES `chucvu` (`MACV`);
 
 --
 -- Constraints for table `sanpham`
