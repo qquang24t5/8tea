@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons8_back_52px.png" />
+         </image>
+      </ImageView>
+      <TableView layoutX="86.0" layoutY="271.0" prefHeight="222.0" prefWidth="742.0">
+        <columns>
+          <TableColumn prefWidth="81.0" text="Mã NVL" />
+          <TableColumn prefWidth="100.0" text="Loại NVL" />
+            <TableColumn prefWidth="156.33334350585938" text="Tên NVL" />
+            <TableColumn prefWidth="78.66668701171875" text="Số lượng" />
+            <TableColumn prefWidth="99.33331298828125" text="Đơn vị tính" />
+            <TableColumn prefWidth="106.3333740234375" text="Giá nhập" />
+            <TableColumn prefWidth="121.6666259765625" text="Nhà cung cấp" />
+        </columns>
+      </TableView>
+      <Label layoutX="86.0" layoutY="66.0" text="Mã NVL">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="86.0" layoutY="87.0" />
+      <Label layoutX="86.0" layoutY="120.0" text="Loại NVL">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="88.0" layoutY="173.0" text="Tên NVL">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="86.0" layoutY="193.0" />
+      <Label layoutX="325.0" layoutY="68.0" text="Số lượng">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="325.0" layoutY="88.0" />
+      <Label layoutX="325.0" layoutY="121.0" text="Đơn vị tính">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="325.0" layoutY="141.0" />
+      <Label layoutX="325.0" layoutY="172.0" text="Giá nhập">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="325.0" layoutY="193.0" />
+      <Label layoutX="561.0" layoutY="67.0" text="Nhà cung cấp">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="86.0" layoutY="141.0" prefWidth="150.0" />
+      <ComboBox layoutX="561.0" layoutY="88.0" prefWidth="150.0" />
+      <Button layoutX="88.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Thêm" />
+      <Button layoutX="185.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Sửa" />
+      <Button layoutX="289.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Xóa" />
+      <Line endX="5.33331298828125" endY="150.0" layoutX="269.0" layoutY="68.0" startX="5.33331298828125" startY="9.333328247070312" />
+      <Line endX="5.33331298828125" endY="150.0" layoutX="523.0" layoutY="67.0" startX="5.33331298828125" startY="9.333328247070312" />
+      <Label layoutX="316.0" layoutY="9.0" text="QUẢN LÝ KHO" textFill="#348bc5">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

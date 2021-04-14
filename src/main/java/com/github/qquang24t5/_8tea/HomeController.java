@@ -31,6 +31,12 @@ public class HomeController implements Initializable {
     private Label txtName;
     @FXML
     private Label txtPer;
+    @FXML
+    private Button btnNV1;
+    @FXML
+    private Button btnNV2;
+    @FXML
+    private Button btnNV21;
 
     /**
      * Initializes the controller class.
@@ -64,5 +70,20 @@ public class HomeController implements Initializable {
         NhanVien cu = new BUS_NhanVien().TimNV(EightTeaApplication.userhientai);
         txtName.setText(cu.getHoTen());
         txtPer.setText(new BUS_ChucVu().tenCV(cu.getMaCV()));
+    }
+
+    @FXML
+    private void formQLK(ActionEvent event) throws IOException {
+         EightTeaApplication.setRoot("kho");
+    }
+
+    @FXML
+    private void formPL(ActionEvent event) throws IOException {
+         EightTeaApplication.setRoot("phanloaiNVL");
+    }
+
+    @FXML
+    private void formNCC(ActionEvent event) throws IOException {
+         EightTeaApplication.setRoot("nhacungcap");
     }
 }
