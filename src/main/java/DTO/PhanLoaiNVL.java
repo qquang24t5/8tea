@@ -10,15 +10,15 @@ package DTO;
  * @author Admin
  */
 public class PhanLoaiNVL {
-    String MaLoaiNVL , TenNVL ;
+    String MaLoaiNVL , TenLoaiNVL ;
     
     public PhanLoaiNVL()    {
         
     }
 
-    public PhanLoaiNVL(String MaLoaiNVL, String TenNVL) {
+    public PhanLoaiNVL(String MaLoaiNVL, String TenLoaiNVL) {
         this.MaLoaiNVL = MaLoaiNVL;
-        this.TenNVL = TenNVL;
+        this.TenLoaiNVL = TenLoaiNVL;
     }
 
     public String getMaLoaiNVL() {
@@ -29,12 +29,12 @@ public class PhanLoaiNVL {
         this.MaLoaiNVL = MaLoaiNVL;
     }
 
-    public String getTenNVL() {
-        return TenNVL;
+    public String getTenLoaiNVL() {
+        return TenLoaiNVL;
     }
 
-    public void setTenNVL(String TenNVL) {
-        this.TenNVL = TenNVL;
+    public void setTenLoaiNVL(String TenLoaiNVL) {
+        this.TenLoaiNVL = TenLoaiNVL;
     }
     
     

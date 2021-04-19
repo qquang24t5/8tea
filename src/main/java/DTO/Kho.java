@@ -10,7 +10,7 @@ package DTO;
  * @author Admin
  */
 public class Kho {
-    String MaNVL, MaLoaiNVL ,TenNVL ,DoViTinh ,MaNCC;
+    String MaNVL, MaLoaiNVL ,TenNVL ,DonViTinh ,MaNCC;
     int SoLuong ;
     double DonGiaNhap;
     
@@ -18,11 +18,11 @@ public class Kho {
         
     }
 
-    public Kho(String MaNVL, String MaLoaiNVL, String TenNVL, String DoViTinh, String MaNCC, int SoLuong, double DonGiaNhap) {
+    public Kho(String MaNVL, String MaLoaiNVL, String TenNVL, String DonViTinh, String MaNCC, int SoLuong, double DonGiaNhap) {
         this.MaNVL = MaNVL;
         this.MaLoaiNVL = MaLoaiNVL;
         this.TenNVL = TenNVL;
-        this.DoViTinh = DoViTinh;
+        this.DonViTinh = DonViTinh;
         this.MaNCC = MaNCC;
         this.SoLuong = SoLuong;
         this.DonGiaNhap = DonGiaNhap;
@@ -52,12 +52,12 @@ public class Kho {
         this.TenNVL = TenNVL;
     }
 
-    public String getDoViTinh() {
-        return DoViTinh;
+    public String getDonViTinh() {
+        return DonViTinh;
     }
 
-    public void setDoViTinh(String DoViTinh) {
-        this.DoViTinh = DoViTinh;
+    public void setDonViTinh(String DonViTinh) {
+        this.DonViTinh = DonViTinh;
     }
 
     public String getMaNCC() {
