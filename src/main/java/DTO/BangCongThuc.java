@@ -10,19 +10,8 @@ package DTO;
  * @author Admin
  */
 public class BangCongThuc {
-    String MaSP , MaNVL, DonViTinh ;
+    String MaSP , MaNVL ;
     int SoLuong ;
-    
-    public BangCongThuc()   {
-        
-    }
-
-    public BangCongThuc(String MaSP, String MaNVL, String DonViTinh, int SoLuong) {
-        this.MaSP = MaSP;
-        this.MaNVL = MaNVL;
-        this.DonViTinh = DonViTinh;
-        this.SoLuong = SoLuong;
-    }
 
     public String getMaSP() {
         return MaSP;
@@ -40,14 +29,6 @@ public class BangCongThuc {
         this.MaNVL = MaNVL;
     }
 
-    public String getDonViTinh() {
-        return DonViTinh;
-    }
-
-    public void setDonViTinh(String DonViTinh) {
-        this.DonViTinh = DonViTinh;
-    }
-
     public int getSoLuong() {
         return SoLuong;
     }
@@ -56,5 +37,10 @@ public class BangCongThuc {
         this.SoLuong = SoLuong;
     }
     
+    public BangCongThuc()   {
+        
+    }
+
+  
     
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2021 at 06:52 AM
+-- Generation Time: Apr 26, 2021 at 04:41 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -29,9 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bangcongthuc` (
   `MASP` varchar(50) NOT NULL,
-  `SOLUONG` int(11) NOT NULL,
-  `DONVITINH` varchar(50) NOT NULL
+  `MANVL` varchar(11) NOT NULL,
+  `SOLUONG` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `bangcongthuc`
+--
+
+INSERT INTO `bangcongthuc` (`MASP`, `MANVL`, `SOLUONG`) VALUES
+('ET27183', 'NVL1647823', 12),
+('ET27183', 'NVL4271077', 12);
 
 -- --------------------------------------------------------
 
@@ -80,7 +88,8 @@ INSERT INTO `chucnang` (`MACN`, `TENCN`) VALUES
 ('CN02', 'Quản lý nhân viên'),
 ('CN03', 'Lập hóa đơn'),
 ('CN04', 'Quản lý công thức'),
-('CN05', 'Quản lý kho');
+('CN05', 'Quản lý kho'),
+('CN06', 'Quản lý chức vụ / chức năng');
 
 -- --------------------------------------------------------
 
@@ -99,8 +108,7 @@ CREATE TABLE `chucvu` (
 
 INSERT INTO `chucvu` (`MACV`, `TENCV`) VALUES
 ('TN', 'Thu ngân'),
-('TP', 'Trưởng phòng'),
-('TT', 'Trống');
+('TP', 'Trưởng phòng');
 
 -- --------------------------------------------------------
 
@@ -132,6 +140,15 @@ CREATE TABLE `kho` (
   `MANCC` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `kho`
+--
+
+INSERT INTO `kho` (`MANVL`, `MALOAINVL`, `TENNVL`, `SOLUONG`, `DONVITINH`, `DONGIANHAP`, `MANCC`) VALUES
+('NVL1647823', 'LNVL876821', 'Trân châu', 100, 'kg', 15000, 'NCC7376140'),
+('NVL4271077', 'LNVL876821', 'Đường', 100, 'kg', 20000, 'NCC6001358'),
+('NVL8138825', 'LNVL344887', 'xyz', 675, 'xyz', 789, 'NCC7376140');
+
 -- --------------------------------------------------------
 
 --
@@ -159,6 +176,16 @@ CREATE TABLE `nhacungcap` (
   `SDT` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `nhacungcap`
+--
+
+INSERT INTO `nhacungcap` (`MANCC`, `TENNCC`, `SDT`) VALUES
+('NCC2826767', 'Jack', '0946168964'),
+('NCC6001358', 'Bill', '09003615936'),
+('NCC7376140', 'Emma', '0919463412'),
+('NCC8853644', 'dd', '0907666333');
+
 -- --------------------------------------------------------
 
 --
@@ -181,22 +208,9 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`MANV`, `MACV`, `HOTEN`, `GIOITINH`, `SDT`, `NGAYSINH`, `MATKHAU`, `TRANGTHAI`) VALUES
-('231', 'TT', 'tuan', '0', '0123456389', '23/09/2000', '123456', 1),
-('2313', 'TP', 'Tuan', '0', '0934045700', '23/09/2000', '123456789', 1),
-('32131', 'TT', '444', '1', '0934021311', '22/04/1999', '123456789', 1),
-('321313', 'TT', 'laocong', '0', '0875765211', '08/04/1999', '123456789', 1),
-('60093690', 'TP', 'ramdon', '0', '0827817288', '13/03/1998', '123456789', 1),
-('LMAO', 'TN', 'Truong Kute', '1', '113', '24/08/2000', 'darkdark', 1),
-('NV001', 'TT', 'ABC', '0', '0986457958', '12/04/2000', '123456789', 1),
-('NV20421514', 'TP', 'petruogkute', '0', '0975786211', '17/04/1997', '123456789', 1),
-('NV35569663', 'TP', 'tranducbo', '0', '0972877166', '18/04/1997', '123456789', 1),
-('NV43240710', 'TN', 'lololo', '0', '0927182311', '08/04/1998', '123456789', 1),
-('NV72837659', 'TP', 'trieugay', '1', '0617455322', '16/04/1998', '123456789', 2),
-('NV77434461', 'TP', 'dsada21', '0', '0982713133', '10/04/1997', '123456789', 1),
-('QQ123', 'TP', 'Quang', '0', '0907666555', '12/04/2000', '123456789', 1),
-('sdsa', 'TT', 'Linh', '1', '0934034231', '19/03/1998', '123456789', 1),
-('siapa', 'TN', 'Trieu', '0', '0123456789', '27/02/2000', 'trieubaby', 1),
-('tk12313', 'TT', 'kenny sang', '0', '0827124122', '10/04/1997', '123456789', 1);
+('231', 'TP', 'Tuan', '0', '0123456389', '23/09/2000', '123456', 1),
+('LMAO', 'TP', 'Trường kute', '0', '0903615936', '24/08/2000', 'darkdark', 1),
+('siapa', 'TN', 'Trieu', '0', '0123456789', '27/02/2000', 'trieubaby', 1);
 
 -- --------------------------------------------------------
 
@@ -206,8 +220,16 @@ INSERT INTO `nhanvien` (`MANV`, `MACV`, `HOTEN`, `GIOITINH`, `SDT`, `NGAYSINH`, 
 
 CREATE TABLE `phanloainvl` (
   `MALOAINVL` varchar(10) NOT NULL,
-  `TENNVL` varchar(30) NOT NULL
+  `TENLOAINVL` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `phanloainvl`
+--
+
+INSERT INTO `phanloainvl` (`MALOAINVL`, `TENLOAINVL`) VALUES
+('LNVL344887', 'Trà'),
+('LNVL876821', 'Bột');
 
 -- --------------------------------------------------------
 
@@ -219,6 +241,15 @@ CREATE TABLE `phanloaisp` (
   `MALOAISP` varchar(10) NOT NULL,
   `TENLOAISP` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `phanloaisp`
+--
+
+INSERT INTO `phanloaisp` (`MALOAISP`, `TENLOAISP`) VALUES
+('LSP13737', 'Đá xay'),
+('LSP83272', 'Trà trái cây'),
+('LSP98931', 'CAFE');
 
 -- --------------------------------------------------------
 
@@ -250,9 +281,14 @@ CREATE TABLE `quyen_chucnang` (
 --
 
 INSERT INTO `quyen_chucnang` (`MACN`, `MACV`) VALUES
+('CN01', 'TN'),
+('CN03', 'TN'),
+('CN04', 'TN'),
 ('CN01', 'TP'),
 ('CN02', 'TP'),
-('CN01', 'TN');
+('CN04', 'TP'),
+('CN05', 'TP'),
+('CN06', 'TP');
 
 -- --------------------------------------------------------
 
@@ -261,12 +297,20 @@ INSERT INTO `quyen_chucnang` (`MACN`, `MACV`) VALUES
 --
 
 CREATE TABLE `sanpham` (
-  `MASP` varchar(10) NOT NULL,
-  `TENSP` varchar(10) NOT NULL,
+  `MASP` varchar(40) NOT NULL,
+  `TENSP` varchar(40) NOT NULL,
   `MALOAISP` varchar(10) NOT NULL,
-  `SIZE` varchar(255) NOT NULL,
   `GIABAN` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sanpham`
+--
+
+INSERT INTO `sanpham` (`MASP`, `TENSP`, `MALOAISP`, `GIABAN`) VALUES
+('ET27183', 'Trà đào', 'LSP83272', 25000),
+('SP21847', 'Trà dâu', 'LSP83272', 30000),
+('SP82787', 'Kiwi đá xay', 'LSP13737', 35000);
 
 --
 -- Indexes for dumped tables
@@ -378,12 +422,6 @@ ALTER TABLE `sanpham`
 --
 
 --
--- Constraints for table `bangcongthuc`
---
-ALTER TABLE `bangcongthuc`
-  ADD CONSTRAINT `bangcongthuc_ibfk_1` FOREIGN KEY (`MASP`) REFERENCES `sanpham` (`MASP`);
-
---
 -- Constraints for table `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
@@ -405,24 +443,11 @@ ALTER TABLE `hoadon`
   ADD CONSTRAINT `hoadon_ibfk_2` FOREIGN KEY (`MAKM`) REFERENCES `khuyenmai` (`MAKM`);
 
 --
--- Constraints for table `kho`
---
-ALTER TABLE `kho`
-  ADD CONSTRAINT `kho_ibfk_1` FOREIGN KEY (`MALOAINVL`) REFERENCES `phanloainvl` (`MALOAINVL`),
-  ADD CONSTRAINT `kho_ibfk_2` FOREIGN KEY (`MANCC`) REFERENCES `nhacungcap` (`MANCC`);
-
---
 -- Constraints for table `phieunhap`
 --
 ALTER TABLE `phieunhap`
   ADD CONSTRAINT `phieunhap_ibfk_1` FOREIGN KEY (`MANV`) REFERENCES `nhanvien` (`MANV`),
   ADD CONSTRAINT `phieunhap_ibfk_2` FOREIGN KEY (`MANCC`) REFERENCES `nhacungcap` (`MANCC`);
-
---
--- Constraints for table `sanpham`
---
-ALTER TABLE `sanpham`
-  ADD CONSTRAINT `sanpham_ibfk_1` FOREIGN KEY (`MALOAISP`) REFERENCES `phanloaisp` (`MALOAISP`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

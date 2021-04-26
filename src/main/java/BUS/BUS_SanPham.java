@@ -28,7 +28,7 @@ public class BUS_SanPham {
                 SanPham sp = new SanPham();
                 sp.setMaSP(rs.getString("MaSP"));
                 sp.setTenSP(rs.getString("TenSP"));
-                sp.setMaLoaiSP(rs.getString("MaLoaiSP"));
+                sp.setMaLoaiSP(new BUS_PhanLoaiSP().layTenLoaiSP(rs.getString("MaLoaiSP")));
                 //sp.setSize(rs.getString("Size"));
                 sp.setGiaBan(rs.getDouble("GiaBan"));
                 list.add(sp);
@@ -41,14 +41,14 @@ public class BUS_SanPham {
     }
     
     public boolean ThemSP(SanPham sp) {
-        String sql = "insert into SanPham(MaSP,TenSP,MaLoaiSP,Size,GiaBan) values(?,?,?,?,?)";
+        String sql = "insert into SanPham(MaSP,TenSP,MaLoaiSP,GiaBan) values(?,?,?,?)";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.setString(1,sp.getMaSP());
             ps.setString(2,sp.getTenSP());
-            ps.setString(3,sp.getMaLoaiSP());
+            ps.setString(3,new BUS_PhanLoaiSP().layMaLoaiSP(sp.getMaLoaiSP()));
             //ps.setString(4,sp.getSize());
-            ps.setDouble(5,sp.getGiaBan());
+            ps.setDouble(4,sp.getGiaBan());
             return ps.executeUpdate() > 0 ;
             
             
@@ -58,8 +58,8 @@ public class BUS_SanPham {
         return false;
     }
     
-    public boolean SuaSP(String MaSP  , String TenSP,String MaLoaiSP , double GiaBan) {
-        String sql = "UPDATE SanPham set TenSP='"+TenSP+"' , MaLoaiSP='"+MaLoaiSP+"' , GiaBan="+GiaBan+" where MaSP='"+MaSP+"' ";
+    public boolean SuaSP(SanPham s) {
+        String sql = "UPDATE SanPham set TenSP='"+s.getTenSP()+"' , MaLoaiSP='"+s.getMaLoaiSP()+"' , GiaBan="+s.getGiaBan()+" where MaSP='"+s.getMaSP()+"' ";
          try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();
@@ -71,7 +71,7 @@ public class BUS_SanPham {
     }
     
     public boolean XoaSP(String MaSP)   {
-        String sql = "delete * from SanPham where MaSP = '"+MaSP+"'";
+        String sql = "delete from SanPham where MaSP = '"+MaSP+"'";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();
@@ -81,4 +81,5 @@ public class BUS_SanPham {
         }
         return false;
     }
+    
 }

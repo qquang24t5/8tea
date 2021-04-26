@@ -6,31 +6,26 @@
 package BUS;
 
 import DAO.DAO;
-import DTO.PhanLoaiSP;
+import DTO.BangCongThuc;
+import DTO.SanPham;
+import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-
-/**
- *
- * @author Admin
- */
-public class BUS_PhanLoaiSP {
+public class BUS_CongThuc {
     DAO dao = new DAO();
-    public ArrayList<PhanLoaiSP> getListLoaiSP(){
-        ArrayList<PhanLoaiSP> list = new ArrayList<>();
-        String sql = "select * from PhanLoaiSP";
+    public ArrayList<BangCongThuc> getListCT(String masp){
+        ArrayList<BangCongThuc> list = new ArrayList<>();
+        String sql = "SELECT kho.TENNVL,bangcongthuc.SOLUONG FROM bangcongthuc,kho where kho.MANVL=bangcongthuc.MANVL and bangcongthuc.MASP='"+masp+"'";
         
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                PhanLoaiSP plsp = new PhanLoaiSP();
-                plsp.setMaLoaiSP(rs.getString("MaLoaiSP"));
-                plsp.setTenLoai(rs.getString("TenLoaiSP"));
-                
-                list.add(plsp);
+                BangCongThuc ct = new BangCongThuc();
+                ct.setMaNVL(rs.getString(1));
+                ct.setSoLuong(2);
+                list.add(ct);
                 
             }
         } catch (Exception e) {
@@ -39,12 +34,14 @@ public class BUS_PhanLoaiSP {
         return list;
     }
     
-    public boolean ThemLoaiSP(PhanLoaiSP plsp) {
-        String sql = "insert into PhanLoaiSP(MaLoaiSP,TenLoaiSP) values(?,?)";
+    public boolean ThemNL(BangCongThuc ct) {
+        String sql = "insert into bangcongthuc(MASP,MaNVL,SOLUONG) values(?,?,?)";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
-            ps.setString(1,plsp.getMaLoaiSP());
-            ps.setString(2,plsp.getTenLoai());
+            ps.setString(1,ct.getMaSP());
+            ps.setString(2,MaNVL(ct.getMaNVL()));
+            ps.setInt(3,ct.getSoLuong());
+           
             return ps.executeUpdate() > 0 ;
             
             
@@ -54,8 +51,8 @@ public class BUS_PhanLoaiSP {
         return false;
     }
     
-    public boolean SuaLoaiSP(String MaLoaiSP , String TenLoaiSP) {
-        String sql = "UPDATE PhanLoaiSP set TenLoaiSP='"+TenLoaiSP+"' where MaLoaiSP='"+MaLoaiSP+"' ";
+    public boolean SuaSP(SanPham s) {
+        String sql = "UPDATE SanPham set TenSP='"+s.getTenSP()+"' , MaLoaiSP='"+s.getMaLoaiSP()+"' , GiaBan="+s.getGiaBan()+" where MaSP='"+s.getMaSP()+"' ";
          try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();
@@ -66,8 +63,8 @@ public class BUS_PhanLoaiSP {
          return false;
     }
     
-    public boolean XoaLoaiSP(String MaLoaiSP)   {
-        String sql = "delete from PhanLoaiSP where MaLoaiSP = '"+MaLoaiSP+"'";
+    public boolean XoaNL(String MaSP,String MaNVL)   {
+        String sql = "delete from bangcongthuc where MASP = '"+MaSP+"' and MANVL='"+MaNVL+"'";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();
@@ -77,9 +74,8 @@ public class BUS_PhanLoaiSP {
         }
         return false;
     }
-    public String layTenLoaiSP(String ma)
-    {
-        String sql = "select TenLoaiSP from phanloaisp where MaLoaiSP = '"+ma+"'";
+    public String MaNVL(String TenNVL)   {
+        String sql = "select MaNVL from Kho where TenNVL = N'"+TenNVL+"'";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -87,24 +83,25 @@ public class BUS_PhanLoaiSP {
             {
                 return rs.getString(1);
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "Chưa có";
     }
-    public String layMaLoaiSP(String ten)
-    {
-        String sql = "select MaLoaiSP from phanloaisp where TenLoaiSP = N'"+ten+"'";
+    public boolean KiemTraNL(String MaSP,String MaNVL)   {
+        String sql = "select * from bangcongthuc where MASP = '"+MaSP+"' and MANVL='"+MaNVL+"'";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                return rs.getString(1);
+                return true;
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Chưa có";
+        return false;
     }
 }

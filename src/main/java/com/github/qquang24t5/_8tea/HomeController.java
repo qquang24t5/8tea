@@ -7,10 +7,12 @@ package com.github.qquang24t5._8tea;
 
 import BUS.BUS_ChucVu;
 import BUS.BUS_NhanVien;
+import BUS.BUS_Quyen_ChucNang;
 import DTO.NhanVien;
 import com.github.qquang24t5._8tea.EightTeaApplication;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,11 +34,21 @@ public class HomeController implements Initializable {
     @FXML
     private Label txtPer;
     @FXML
-    private Button btnNV1;
+    private Button btnSP;
     @FXML
-    private Button btnNV2;
+    private Button btnCT;
     @FXML
-    private Button btnNV21;
+    private Button btnHD;
+    @FXML
+    private Button btnCV;
+    @FXML
+    private Button btnNCC;
+    @FXML
+    private Button btnKho;
+    @FXML
+    private Button btnPLNVL;
+    @FXML
+    private Button btnPLSP;
 
     /**
      * Initializes the controller class.
@@ -44,7 +56,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setHome();
-
+        setDSQuyen();
     }
 
     @FXML
@@ -85,5 +97,68 @@ public class HomeController implements Initializable {
     @FXML
     private void formNCC(ActionEvent event) throws IOException {
          EightTeaApplication.setRoot("nhacungcap");
+    }
+
+    @FXML
+    private void formQLSP(ActionEvent event) throws IOException {
+        EightTeaApplication.setRoot("sanpham");
+    }
+
+    @FXML
+    private void formCT(ActionEvent event) throws IOException {
+        EightTeaApplication.setRoot("congthuc");
+    }
+
+    @FXML
+    private void formHD(ActionEvent event) throws IOException {
+//        EightTeaApplication.setRoot("hoadon");
+    }
+
+    @FXML
+    private void formPLSP(ActionEvent event) throws IOException {
+         EightTeaApplication.setRoot("phanloaisp");
+    }
+    public void setDSQuyen()
+    {
+        btnCT.setDisable(true);
+        btnCV.setDisable(true);
+        btnHD.setDisable(true);
+        btnKho.setDisable(true);
+        btnNCC.setDisable(true);
+        btnNV.setDisable(true);
+        btnPLNVL.setDisable(true);
+        btnSP.setDisable(true);
+        btnPLSP.setDisable(true);
+        ArrayList<String> list = new BUS_Quyen_ChucNang().getListQuyen(EightTeaApplication.userhientai);
+        for(String s:list)
+        {
+            if(s.equals("CN01"))
+            {
+                btnSP.setDisable(false);
+                btnPLSP.setDisable(false);
+            }
+            if(s.equals("CN02"))
+            {
+                  btnNV.setDisable(false);
+            }
+            if(s.equals("CN03"))
+            {
+                btnHD.setDisable(false);
+            }
+            if(s.equals("CN04"))
+            {
+                btnCT.setDisable(false);
+            }
+            if(s.equals("CN05"))
+            {
+                btnKho.setDisable(false);
+                btnPLNVL.setDisable(false);
+            }
+            if(s.equals("CN06"))
+            {
+                btnCV.setDisable(false);
+            }
+        }
+        
     }
 }

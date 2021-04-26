@@ -10,11 +10,15 @@
    <children>
       <VBox layoutX="6.0" layoutY="95.0" prefHeight="406.0" prefWidth="112.0">
          <children>
+            <Button fx:id="btnSP" mnemonicParsing="false" onAction="#formQLSP" prefHeight="38.0" prefWidth="106.0" text="Sản phẩm" />
+            <Button fx:id="btnCT" mnemonicParsing="false" onAction="#formCT" prefHeight="38.0" prefWidth="106.0" text="Công thức" />
+            <Button fx:id="btnHD" mnemonicParsing="false" onAction="#formHD" prefHeight="38.0" prefWidth="106.0" text="Hóa đơn" />
             <Button fx:id="btnNV" mnemonicParsing="false" onAction="#formQLNV" prefHeight="38.0" prefWidth="106.0" text="Nhân viên" />
-            <Button mnemonicParsing="false" onAction="#formCV" prefHeight="38.0" prefWidth="106.0" text="Chức vụ" />
-            <Button fx:id="btnNV1" mnemonicParsing="false" onAction="#formNCC" prefHeight="38.0" prefWidth="106.0" text="Nhà cung cấp" />
-            <Button fx:id="btnNV2" mnemonicParsing="false" onAction="#formQLK" prefHeight="38.0" prefWidth="106.0" text="Quản lý kho" />
-            <Button fx:id="btnNV21" mnemonicParsing="false" onAction="#formPL" prefHeight="38.0" prefWidth="106.0" text="Phân loại NVL" />
+            <Button fx:id="btnCV" mnemonicParsing="false" onAction="#formCV" prefHeight="38.0" prefWidth="106.0" text="Chức vụ" />
+            <Button fx:id="btnNCC" mnemonicParsing="false" onAction="#formNCC" prefHeight="38.0" prefWidth="106.0" text="Nhà cung cấp" />
+            <Button fx:id="btnKho" mnemonicParsing="false" onAction="#formQLK" prefHeight="38.0" prefWidth="106.0" text="Quản lý kho" />
+            <Button fx:id="btnPLNVL" mnemonicParsing="false" onAction="#formPL" prefHeight="38.0" prefWidth="106.0" text="Phân loại NVL" />
+            <Button fx:id="btnPLSP" mnemonicParsing="false" onAction="#formPLSP" prefHeight="38.0" prefWidth="106.0" text="Phân loại SP" />
             <Button mnemonicParsing="false" onAction="#dangxuat" prefHeight="38.0" prefWidth="106.0" text="Đăng xuất" />
          </children>
       </VBox>

@@ -87,5 +87,21 @@ public class BUS_Quyen_ChucNang {
         }
         return false;
     }
-    
+    public ArrayList<String> getListQuyen(String MaNV){
+        ArrayList<String> list = new ArrayList<>();
+        String sql = "SELECT macn from quyen_chucnang where macv = (select macv from nhanvien where manv = '"+MaNV+"')";
+        
+        try {
+            PreparedStatement ps  = dao.conn().prepareStatement(sql);
+            ResultSet rs  =  ps.executeQuery();
+            while(rs.next())
+            {
+                
+                list.add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
