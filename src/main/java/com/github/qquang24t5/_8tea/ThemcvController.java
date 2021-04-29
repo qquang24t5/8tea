@@ -60,11 +60,14 @@ public class ThemcvController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    ArrayList<ChucNang> listcn;
+    CheckBox[] list;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        setTableChucNang();
         setDSQuyen();
+        setTableChucNang();
+        
     }    
 
     @FXML
@@ -111,6 +114,7 @@ public class ThemcvController implements Initializable {
             {
                 EightTeaApplication.alertInf("Đã thêm quyền chức năng mới");
                 setTableChucNang();
+                setDSQuyen();
             }
             else
             {
@@ -120,12 +124,13 @@ public class ThemcvController implements Initializable {
             }
         }
     }
-     ArrayList<ChucNang> listcn = new BUS_ChucNang().getListCN();
-        CheckBox[] list = new CheckBox[listcn.size()];
-        
+     
+    
     public void setDSQuyen()
     {
-       
+        vbox.getChildren().clear();
+        listcn = new BUS_ChucNang().getListCN();
+        list = new CheckBox[listcn.size()];
         int i = 0;
         for(ChucNang cn : listcn)
         {
@@ -150,6 +155,7 @@ public class ThemcvController implements Initializable {
         BUS_ChucNang buscn = new BUS_ChucNang();
         BUS_Quyen_ChucNang qcn = new BUS_Quyen_ChucNang();
         
+       
         
         ArrayList<String> dsmacn = new ArrayList<>();
         for(int i=0;i<listcn.size();i++)
@@ -205,6 +211,7 @@ public class ThemcvController implements Initializable {
                 {
                     new BUS_ChucNang().XoaCN(String.valueOf(cn.getMaCN()));
                 setTableChucNang();
+                setDSQuyen();
 		txtMaQuyen.setText("");
 		txtTenQuyen.setText("");
                 EightTeaApplication.alertInf("Xóa thành công !");
@@ -229,11 +236,16 @@ public class ThemcvController implements Initializable {
                 cn.setTenCN(String.valueOf(txtTenQuyen));
                 new BUS_ChucNang().SuaCN(String.valueOf(cn.getMaCN()), tenQuyen);
                 setTableChucNang();
+                setDSQuyen();
 		txtMaQuyen.setText("");
 		txtTenQuyen.setText("");
                 txtMaQuyen.setDisable(false);
                 EightTeaApplication.alertInf("Sửa thành công !");
             }
         }
+    }
+
+    private void clearvbox(ActionEvent event) {
+        vbox.getChildren().clear();
     }
 }

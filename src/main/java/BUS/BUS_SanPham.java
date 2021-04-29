@@ -39,7 +39,29 @@ public class BUS_SanPham {
         }
         return list;
     }
-    
+    public ArrayList<SanPham> getListSP(String maloai){
+        ArrayList<SanPham> list = new ArrayList<>();
+        String sql = "select * from SanPham where MALOAISP='"+maloai+"'";
+        
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString("MaSP"));
+                sp.setTenSP(rs.getString("TenSP"));
+                sp.setMaLoaiSP(new BUS_PhanLoaiSP().layTenLoaiSP(rs.getString("MaLoaiSP")));
+                //sp.setSize(rs.getString("Size"));
+                sp.setGiaBan(rs.getDouble("GiaBan"));
+                list.add(sp);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     public boolean ThemSP(SanPham sp) {
         String sql = "insert into SanPham(MaSP,TenSP,MaLoaiSP,GiaBan) values(?,?,?,?)";
         try {

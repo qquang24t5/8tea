@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 
 /**
@@ -18,7 +19,8 @@ import javafx.scene.image.Image;
 public class EightTeaApplication extends Application {
 
     private static Scene scene;
-    public static String userhientai=null;
+    public static String userhientai = null;
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("login"));
@@ -63,6 +65,20 @@ public class EightTeaApplication extends Application {
         } else {
             return false;
         }
+    }
+
+    public static String alertInput() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Thông báo");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Nhập số lượng :");
+
+// Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            return result.get();
+        }
+        return null;
     }
 
 }

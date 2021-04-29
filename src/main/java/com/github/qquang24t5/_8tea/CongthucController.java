@@ -166,16 +166,6 @@ public class CongthucController implements Initializable {
         }
     }
 
-    @FXML
-    private void suaNL(ActionEvent event) {
-        if (tblCT.getSelectionModel().getSelectedItem() == null) {
-            EightTeaApplication.alertInf("Vui lòng chọn dòng cần thực hiện !");
-        }
-        else{
-            BangCongThuc ct =tblCT.getSelectionModel().getSelectedItem();
-            
-        }
-    }
 
     @FXML
     private void xoaNL(ActionEvent event) {

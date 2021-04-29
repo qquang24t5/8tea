@@ -12,18 +12,7 @@ package DTO;
 public class ChiTietHoaDon {
     String MaHD, MaSP;
     int SoLuong;
-    double DonGia;
-    
-    public ChiTietHoaDon()  {
-        
-    }
-
-    public ChiTietHoaDon(String MaHD, String MaSP, int SoLuong, double DonGia) {
-        this.MaHD = MaHD;
-        this.MaSP = MaSP;
-        this.SoLuong = SoLuong;
-        this.DonGia = DonGia;
-    }
+    double DonGia,ThanhTien;
 
     public String getMaHD() {
         return MaHD;
@@ -56,6 +45,20 @@ public class ChiTietHoaDon {
     public void setDonGia(double DonGia) {
         this.DonGia = DonGia;
     }
+
+    public double getThanhTien() {
+        return ThanhTien;
+    }
+
+    public void setThanhTien(double ThanhTien) {
+        this.ThanhTien = ThanhTien;
+    }
+    
+    public ChiTietHoaDon()  {
+        
+    }
+
+    
     
     
 }

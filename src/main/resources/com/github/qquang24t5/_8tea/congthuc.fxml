@@ -51,8 +51,7 @@
       </Label>
       <Label layoutX="357.0" layoutY="240.0" prefHeight="25.0" prefWidth="164.0" text="ĐVT: muỗng cafe = 5ml (gr)" textFill="#2c2fbc" />
       <Button layoutX="355.0" layoutY="273.0" mnemonicParsing="false" onAction="#themNL" prefHeight="25.0" prefWidth="60.0" text="Thêm" />
-      <Button layoutX="355.0" layoutY="306.0" mnemonicParsing="false" onAction="#suaNL" prefHeight="25.0" prefWidth="60.0" text="Sửa" />
-      <Button layoutX="355.0" layoutY="339.0" mnemonicParsing="false" onAction="#xoaNL" prefHeight="25.0" prefWidth="60.0" text="Xóa" />
+      <Button layoutX="355.0" layoutY="313.0" mnemonicParsing="false" onAction="#xoaNL" prefHeight="25.0" prefWidth="60.0" text="Xóa" />
       <TableView fx:id="tblCT" layoutX="522.0" layoutY="120.0" onMouseClicked="#getDuLieuCT" prefHeight="361.0" prefWidth="313.0">
          <columns>
             <TableColumn fx:id="colNL" prefWidth="174.0" text="Nguyên liệu" />

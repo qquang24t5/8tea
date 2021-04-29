@@ -15,10 +15,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -49,12 +51,23 @@ public class HomeController implements Initializable {
     private Button btnPLNVL;
     @FXML
     private Button btnPLSP;
+    @FXML
+    private Label txtPer1;
+    @FXML
+    private Button btnKM;
+    @FXML
+    private Button btnNH;
+    @FXML
+    private VBox vboxtest;
+    @FXML
+    private Button btnThongKe;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        testButton();
         setHome();
         setDSQuyen();
     }
@@ -86,17 +99,17 @@ public class HomeController implements Initializable {
 
     @FXML
     private void formQLK(ActionEvent event) throws IOException {
-         EightTeaApplication.setRoot("kho");
+        EightTeaApplication.setRoot("kho");
     }
 
     @FXML
     private void formPL(ActionEvent event) throws IOException {
-         EightTeaApplication.setRoot("phanloaiNVL");
+        EightTeaApplication.setRoot("phanloaiNVL");
     }
 
     @FXML
     private void formNCC(ActionEvent event) throws IOException {
-         EightTeaApplication.setRoot("nhacungcap");
+        EightTeaApplication.setRoot("nhacungcap");
     }
 
     @FXML
@@ -111,15 +124,15 @@ public class HomeController implements Initializable {
 
     @FXML
     private void formHD(ActionEvent event) throws IOException {
-//        EightTeaApplication.setRoot("hoadon");
+        EightTeaApplication.setRoot("hoadon");
     }
 
     @FXML
     private void formPLSP(ActionEvent event) throws IOException {
-         EightTeaApplication.setRoot("phanloaisp");
+        EightTeaApplication.setRoot("phanloaisp");
     }
-    public void setDSQuyen()
-    {
+
+    public void setDSQuyen() {
         btnCT.setDisable(true);
         btnCV.setDisable(true);
         btnHD.setDisable(true);
@@ -129,36 +142,79 @@ public class HomeController implements Initializable {
         btnPLNVL.setDisable(true);
         btnSP.setDisable(true);
         btnPLSP.setDisable(true);
+        btnKM.setDisable(true);
+        btnNH.setDisable(true);
+        btnNCC.setDisable(true);
+        btnThongKe.setDisable(true);
         ArrayList<String> list = new BUS_Quyen_ChucNang().getListQuyen(EightTeaApplication.userhientai);
-        for(String s:list)
-        {
-            if(s.equals("CN01"))
-            {
+        for (String s : list) {
+            if (s.equals("CN01")) {
                 btnSP.setDisable(false);
                 btnPLSP.setDisable(false);
             }
-            if(s.equals("CN02"))
-            {
-                  btnNV.setDisable(false);
+            if (s.equals("CN02")) {
+                btnNV.setDisable(false);
             }
-            if(s.equals("CN03"))
-            {
+            if (s.equals("CN03")) {
                 btnHD.setDisable(false);
             }
-            if(s.equals("CN04"))
-            {
+            if (s.equals("CN04")) {
                 btnCT.setDisable(false);
             }
-            if(s.equals("CN05"))
-            {
+            if (s.equals("CN05")) {
                 btnKho.setDisable(false);
                 btnPLNVL.setDisable(false);
             }
-            if(s.equals("CN06"))
-            {
+            if (s.equals("CN06")) {
                 btnCV.setDisable(false);
             }
+            if (s.equals("CN07")) {
+                btnKM.setDisable(false);
+            }
+            if (s.equals("CN08")) {
+                btnNH.setDisable(false);
+            }
+            if (s.equals("CN09")) {
+                btnNCC.setDisable(false);
+            }
+            if (s.equals("CN10")) {
+                btnThongKe.setDisable(false);
+            }
         }
-        
+
+    }
+
+    @FXML
+    private void formKM(ActionEvent event) throws IOException {
+        EightTeaApplication.setRoot("khuyenmai");
+    }
+
+    @FXML
+    private void formNH(ActionEvent event) {
+    }
+
+    @FXML
+    private void formDMK(ActionEvent event) throws IOException {
+        EightTeaApplication.setRoot("doimatkhau");
+    }
+
+    public void testButton() {
+        Button[] btn = new Button[8];
+        for (int i = 0; i < btn.length; i++) {
+            btn[i] = new Button("Number " + (i + 1));
+            
+            btn[i].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    String text = ((Button)e.getSource()).getText();
+                    EightTeaApplication.alertInf("day la so "+text);
+                }
+            });
+            vboxtest.getChildren().add(btn[i]);
+        }
+    }
+
+    @FXML
+    private void formTK(ActionEvent event) {
     }
 }

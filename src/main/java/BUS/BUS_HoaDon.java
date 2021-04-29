@@ -6,6 +6,7 @@
 package BUS;
 
 import DAO.DAO;
+import DTO.ChiTietHoaDon;
 import DTO.HoaDon;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,6 +59,32 @@ public class BUS_HoaDon {
             e.printStackTrace();
         }
         return false;
+    }
+    public boolean order(String masp,String sl)
+    {
+       return true; 
+    }
+    public ArrayList<ChiTietHoaDon> loadOrder(String manv){
+        ArrayList<ChiTietHoaDon> list = new ArrayList<>();
+        String sql ="SELECT sanpham.tensp,chitiethoadon.SOLUONG,sanpham.GIABAN,(chitiethoadon.SOLUONG*sanpham.GIABAN) as ThanhTien\n" +
+"from sanpham,chitiethoadon\n" +
+"where chitiethoadon.MASP = sanpham.MASP and chitiethoadon.MAHD ='"+"ORDER_"+manv+"'";
+        try {
+        PreparedStatement ps = dao.conn().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next())
+        {
+            ChiTietHoaDon ct = new ChiTietHoaDon();
+            ct.setMaSP(rs.getString(1));
+            ct.setSoLuong(rs.getInt(2));
+            ct.setDonGia(rs.getDouble(3));
+            ct.setThanhTien(rs.getDouble(4));
+            list.add(ct);
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
     
 //    public boolean SuaHD(String MaNV , String HoTen ,String GioiTinh , String SDT , String NgaySinh ,String MaCV )  {

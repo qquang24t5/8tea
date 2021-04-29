@@ -30,8 +30,8 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <VBox fx:id="vbox" layoutX="98.0" layoutY="140.0" prefHeight="255.0" prefWidth="264.0" />
-      <Button layoutX="105.0" layoutY="395.0" mnemonicParsing="false" onAction="#themCV" prefHeight="25.0" prefWidth="61.0" text="Thêm" />
+      <VBox fx:id="vbox" layoutX="98.0" layoutY="140.0" prefHeight="312.0" prefWidth="264.0" />
+      <Button layoutX="104.0" layoutY="452.0" mnemonicParsing="false" onAction="#themCV" prefHeight="25.0" prefWidth="61.0" text="Thêm" />
       <Line endX="-6.66668701171875" endY="467.0" layoutX="447.0" layoutY="29.0" startX="-6.66668701171875" startY="-16.333328247070312" />
       <Label layoutX="473.0" layoutY="151.0" text="Danh sách quyền">
          <font>
