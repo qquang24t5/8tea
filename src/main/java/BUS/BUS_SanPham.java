@@ -103,5 +103,20 @@ public class BUS_SanPham {
         }
         return false;
     }
+    public String layMaSP(String ten)
+    {
+        String sql = "select MASP from sanpham where TENSP = N'"+ten+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Chưa có";
+    }
     
 }

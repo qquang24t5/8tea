@@ -151,17 +151,18 @@ public class KhuyenmaiController implements Initializable {
             km.setNgayKT(kt.format(fm));
             km.setPhanTramKM(Integer.parseInt(txtPhanTram.getText()));
             
-            if(kt.getYear()- bd.getYear() < 0 )
+            
+            if(kt.compareTo(bd) < 0 )
             {
                 txtBaoLoi.setText("Ngày kết thúc không được nhỏ hơn ngày bắt đầu !!!");
             }
-            if(bd.getYear() - now.getYear() < 0)
+            if(bd.compareTo(now) < 0)
             {
                 txtBaoLoi.setText("Ngày bắt đầu không được nhỏ hơn ngày hiện tại !!!");
             }
             if(Integer.parseInt(txtPhanTram.getText()) > 70)
             {
-                txtBaoLoi.setText("Do chính sách của cửa hàng nên khuyến mãi không được hơn 70%");
+                txtBaoLoi.setText("Phần trăm khuyến mãi không được hơn 70%");
             }
             if(txtBaoLoi.getText() == "")
             {

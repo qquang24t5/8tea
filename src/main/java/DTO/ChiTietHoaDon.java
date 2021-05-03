@@ -5,6 +5,15 @@
  */
 package DTO;
 
+import BUS.BUS_HoaDon;
+import BUS.BUS_SanPham;
+import com.github.qquang24t5._8tea.EightTeaApplication;
+import com.github.qquang24t5._8tea.LaphoadonController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Button;
+
 /**
  *
  * @author Admin
@@ -13,7 +22,16 @@ public class ChiTietHoaDon {
     String MaHD, MaSP;
     int SoLuong;
     double DonGia,ThanhTien;
+ 
+    Button btn;
 
+    public Button getBtn() {
+        return btn;
+    }
+    
+    public void setBtn(Button btn) {
+        this.btn = btn;
+    }
     public String getMaHD() {
         return MaHD;
     }
@@ -55,7 +73,21 @@ public class ChiTietHoaDon {
     }
     
     public ChiTietHoaDon()  {
-        
+        btn = new Button("Xóa");
+//        btn.setOnAction(e->{
+//            String masp = new BUS_SanPham().layMaSP(this.MaSP);
+//            String mahd = "ORDER_"+EightTeaApplication.userhientai;
+//            if(new BUS_HoaDon().deleteSP_Order(mahd, masp)){
+//                try {
+//                    EightTeaApplication.setRoot("laphoadon");
+//                } catch (IOException ex) {
+//                    Logger.getLogger(ChiTietHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }else{
+//                EightTeaApplication.alertConf("Có lỗi xảy ra, vui lòng thử lại !");
+//            }
+//            
+//        });
     }
 
     

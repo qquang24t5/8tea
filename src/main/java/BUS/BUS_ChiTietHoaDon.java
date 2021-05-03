@@ -19,19 +19,22 @@ public class BUS_ChiTietHoaDon {
     DAO dao = new DAO();
     
     
-    public ArrayList<ChiTietHoaDon> getListCTHD(){
+    public ArrayList<ChiTietHoaDon> getListCTHD(String mahd){
     ArrayList<ChiTietHoaDon> list = new ArrayList<>();
-    String sql = "SELECT * FROM ChiTietHoaDon";
+    String sql = "SELECT sanpham.TENSP,chitiethoadon.SOLUONG,sanpham.GIABAN,(chitiethoadon.SOLUONG*sanpham.GIABAN) as ThanhTien\n" +
+"FROM sanpham,chitiethoadon\n" +
+"WHERE sanpham.MASP=chitiethoadon.MASP and chitiethoadon.MAHD='"+mahd+"'";
     try {
         PreparedStatement ps = dao.conn().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while(rs.next())
         {
             ChiTietHoaDon cthd = new ChiTietHoaDon();
-            cthd.setMaHD(rs.getString("MaHD"));
-            cthd.setMaSP(rs.getString("MaSP"));
+        
+            cthd.setMaSP(rs.getString("TENSP")+ "\n" + rs.getDouble("GIABAN"));
             cthd.setSoLuong(rs.getInt("SoLuong"));
-            cthd.setDonGia(rs.getDouble("DonGia"));
+            
+            cthd.setThanhTien(rs.getDouble("ThanhTien"));
             list.add(cthd);
         }
         } catch (Exception e) {

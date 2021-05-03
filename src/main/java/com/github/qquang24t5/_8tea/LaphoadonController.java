@@ -8,13 +8,20 @@ package com.github.qquang24t5._8tea;
 import BUS.BUS_PhanLoaiSP;
 import BUS.BUS_SanPham;
 import BUS.BUS_HoaDon;
+import BUS.BUS_KhuyenMai;
 import DTO.ChiTietHoaDon;
+import DTO.HoaDon;
 import DTO.PhanLoaiSP;
 import DTO.SanPham;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,9 +34,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -62,6 +72,11 @@ public class LaphoadonController implements Initializable {
     private TableColumn<ChiTietHoaDon, Double> colTT;
     @FXML
     private TableColumn<ChiTietHoaDon, String> colSP;
+    @FXML
+    private TableColumn<ChiTietHoaDon, Button> colXoa;
+    public static Text txtNhap;
+    @FXML
+    private Button btnKiemtraKM;
     /**
      * Initializes the controller class.
      */
@@ -71,8 +86,9 @@ public class LaphoadonController implements Initializable {
         setCBLoaiSP();
         setTblSP();
         setTbOrder();
+        setThanhToan();
     }    
-
+    
     @FXML
     private void backForm(MouseEvent event) throws IOException {
         EightTeaApplication.setRoot("hoadon");
@@ -80,15 +96,78 @@ public class LaphoadonController implements Initializable {
 
     @FXML
     private void ktraKM(ActionEvent event) {
+        if(btnKiemtraKM.getText().equals("Kiểm tra")){
+            String km = txtKM.getText();
+        int pt;
+        if(!km.isEmpty()){
+            pt = new BUS_KhuyenMai().PhanTramKM(km);
+            if(pt!=0){
+                txtThongbaoKM.setTextFill(Color.GREEN);
+                txtThongbaoKM.setText("-"+pt+"%");
+                txtKM.setDisable(true);
+                btnKiemtraKM.setText("Hủy");
+                
+                
+            }else{
+                txtThongbaoKM.setTextFill(Color.RED);
+                txtThongbaoKM.setText("Mã khuyến mãi không tồn tại");
+            }
+        }
+        }
+        else{
+            txtKM.setText("");
+            txtThongbaoKM.setText("");
+            txtKM.setDisable(false);
+            btnKiemtraKM.setText("Kiểm tra");
+        }
+        setThanhToan();
     }
 
     @FXML
     private void lapHD(ActionEvent event) {
+        if(!new BUS_HoaDon().checknullOrder("ORDER_"+EightTeaApplication.userhientai)){
+            EightTeaApplication.alertInf("Hóa đơn không được rỗng");
+        }else{
+            double thanhtoan = Double.parseDouble(txtThanhToan.getText());
+        int value = new Random().nextInt((99999999 - 10000000) + 1) + 10000000;
+        String rdmahd = "HD"+String.valueOf(value);
+        LocalDate ht = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String today = ht.format(formatter);
+        String km;
+        if(new BUS_KhuyenMai().PhanTramKM(txtKM.getText())!=0){
+            km = String.valueOf(txtThongbaoKM.getText());
+        }else{
+            km="Không có";
+        }
+        
+        HoaDon hd = new HoaDon();
+        hd.setMaHD(rdmahd);
+        hd.setNgayTao(today);
+        hd.setTongTien(thanhtoan);
+        hd.setMaNV(EightTeaApplication.userhientai);
+        hd.setMaKM(km);
+        if(new BUS_HoaDon().order_complete("ORDER_"+EightTeaApplication.userhientai, rdmahd)){
+            if(new BUS_HoaDon().ThemHD(hd)){
+                EightTeaApplication.alertInf("Đã tạo hóa đơn mã " +rdmahd);
+                try {
+                    EightTeaApplication.setRoot("laphoadon");
+                } catch (IOException ex) {
+                    Logger.getLogger(LaphoadonController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                EightTeaApplication.alertInf("Có lỗi xảy ra, vui lòng thử lại sau");
+            }
+        }else{
+            EightTeaApplication.alertInf("Có lỗi xảy ra, vui lòng thử lại sau");
+        }
+        }
+        
+        
+        
+        
     }
 
-    @FXML
-    private void resetHD(ActionEvent event) {
-    }
     public void setCBLoaiSP(){
          list = new BUS_PhanLoaiSP().getListLoaiSP();
          listcb = new Button[list.size()+1];
@@ -153,17 +232,33 @@ public class LaphoadonController implements Initializable {
         ArrayList<ChiTietHoaDon> listcthd = new BUS_HoaDon().loadOrder(EightTeaApplication.userhientai);
         for(ChiTietHoaDon od : listcthd)
         {
+            od.getBtn().setOnAction(e->{
+            String masp = new BUS_SanPham().layMaSP(od.getMaSP());
+            String mahd = "ORDER_"+EightTeaApplication.userhientai;
+            if(new BUS_HoaDon().deleteSP_Order(mahd, masp)){
+                setTbOrder();
+            }else{
+                EightTeaApplication.alertConf("Có lỗi xảy ra, vui lòng thử lại !");
+            }
+            setThanhToan();
+        });
             li.add(od);
         }
         colSP.setCellValueFactory(new PropertyValueFactory<ChiTietHoaDon, String> ("MaSP"));
         colSL.setCellValueFactory(new PropertyValueFactory<ChiTietHoaDon, Integer> ("SoLuong"));
         colDG.setCellValueFactory(new PropertyValueFactory<ChiTietHoaDon, Double> ("DonGia"));
         colTT.setCellValueFactory(new PropertyValueFactory<ChiTietHoaDon, Double> ("ThanhTien"));
+        colXoa.setCellValueFactory(new PropertyValueFactory<ChiTietHoaDon, Button> ("btn"));
         
         tblHD.setItems(li);
         
     }
 
+    public void setThanhToan(){
+        int i =new BUS_KhuyenMai().PhanTramKM(txtKM.getText());
+        txtThanhToan.setText(String.valueOf(new BUS_HoaDon().tongtien_Order("ORDER_"+EightTeaApplication.userhientai)*(100-i)/100));
+        
+    }
     @FXML
     private void themSPorder(MouseEvent event) {
       tblSP.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -171,10 +266,40 @@ public class LaphoadonController implements Initializable {
     public void handle(MouseEvent mouseEvent) {
         if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
             if(mouseEvent.getClickCount() == 2){
-               EightTeaApplication.alertInf("double click");
+               if(tblSP.getSelectionModel().getSelectedItem()!=null){
+                   SanPham sp = tblSP.getSelectionModel().getSelectedItem();
+                   String mahd = "ORDER_"+EightTeaApplication.userhientai;
+                   String masp = new BUS_SanPham().layMaSP(sp.getTenSP());
+                   String sl = EightTeaApplication.alertInput();
+                   int sl2 = 0;
+                   if(!sl.matches("[0-9]{1,}")){
+                       EightTeaApplication.alertInf("Hãy nhập số lượng hợp lệ !");
+                   }
+                   else{
+                       sl2 = Integer.parseInt(sl);
+                       if(new BUS_HoaDon().ktraSP_Order(mahd, masp)){
+                           if(new BUS_HoaDon().updateOrder(mahd, masp, sl2)){
+                               setTbOrder();
+                           }
+                       }else{
+                           if(new BUS_HoaDon().order(mahd, masp, sl2)){
+                          setTbOrder();
+                       }else{
+                            EightTeaApplication.alertInf("Có lỗi xảy ra, vui lòng thử lại !");
+                       }
+                       }
+                       
+                       
+                       
+                       
+                       setThanhToan();
+                   }
+                   
+               }
             }
         }
     }
 });
     }
+
 }

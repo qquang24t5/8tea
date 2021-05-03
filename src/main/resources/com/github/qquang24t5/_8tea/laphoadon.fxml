@@ -21,10 +21,11 @@
       </ImageView>
       <TableView fx:id="tblHD" layoutX="359.0" layoutY="85.0" prefHeight="221.0" prefWidth="475.0">
         <columns>
-          <TableColumn fx:id="colSP" prefWidth="134.66668701171875" text="Tên sản phẩm" />
-          <TableColumn fx:id="colSL" prefWidth="81.33331298828125" text="Số lượng" />
-            <TableColumn fx:id="colDG" prefWidth="127.3333740234375" text="Đơn giá" />
-            <TableColumn fx:id="colTT" prefWidth="130.6666259765625" text="Thành tiền" />
+          <TableColumn fx:id="colSP" prefWidth="112.33331298828125" text="Tên sản phẩm" />
+          <TableColumn fx:id="colSL" prefWidth="79.0" text="Số lượng" />
+            <TableColumn fx:id="colDG" prefWidth="116.66668701171875" text="Đơn giá" />
+            <TableColumn fx:id="colTT" prefWidth="124.33331298828125" text="Thành tiền" />
+            <TableColumn fx:id="colXoa" prefWidth="44.33331298828125" />
         </columns>
       </TableView>
       <VBox fx:id="vboxLoaiSP" layoutX="59.0" layoutY="72.0" prefHeight="420.0" prefWidth="112.0" />
@@ -40,15 +41,14 @@
          </font>
       </Label>
       <TextField fx:id="txtThanhToan" editable="false" layoutX="361.0" layoutY="407.0" />
-      <Label layoutX="392.0" layoutY="390.0" text="Thanh toán">
+      <Label layoutX="361.0" layoutY="388.0" text="Thanh toán">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="txtThongbaoKM" layoutX="361.0" layoutY="361.0" prefHeight="17.0" prefWidth="149.0" text="thongbaokm" />
-      <Button layoutX="520.0" layoutY="330.0" mnemonicParsing="false" onAction="#ktraKM" text="Kiểm tra" />
+      <Label fx:id="txtThongbaoKM" layoutX="361.0" layoutY="361.0" prefHeight="17.0" prefWidth="272.0" />
+      <Button fx:id="btnKiemtraKM" layoutX="520.0" layoutY="330.0" mnemonicParsing="false" onAction="#ktraKM" text="Kiểm tra" />
       <Button layoutX="361.0" layoutY="439.0" mnemonicParsing="false" onAction="#lapHD" prefHeight="25.0" prefWidth="93.0" text="Lập hóa đơn" />
-      <Button layoutX="488.0" layoutY="439.0" mnemonicParsing="false" onAction="#resetHD" prefHeight="25.0" prefWidth="93.0" text="Reset" />
       <Label layoutX="59.0" layoutY="48.0" text="LOẠI SẢN PHẨM" textFill="#263e84">
          <font>
             <Font size="15.0" />
