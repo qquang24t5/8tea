@@ -36,7 +36,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtMaNVL" layoutX="86.0" layoutY="87.0" />
+      <TextField fx:id="txtMaNVL" disable="true" layoutX="86.0" layoutY="87.0" />
       <Label layoutX="86.0" layoutY="120.0" text="Loại NVL">
          <font>
             <Font size="15.0" />

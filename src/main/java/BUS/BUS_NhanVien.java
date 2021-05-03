@@ -206,8 +206,11 @@ public class BUS_NhanVien {
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            nv.setMatKhau(rs.getString(1));
-            return mk ;
+            while(rs.next())
+            {
+                mk += rs.getString(1);
+            }
+            
 //            mk = (rs.getString("matkhau"));
             
             

@@ -15,7 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -31,17 +31,19 @@ public class DoimatkhauController implements Initializable {
     @FXML
     private AnchorPane txt;
     @FXML
-    private Text txtBaoLoi;
+    private Label txtBaoLoi;
     @FXML
-    private TextField txtMKCu;
+    private PasswordField txtMKCu;
     @FXML
-    private TextField txtMKMoi;
+    private PasswordField txtMKMoi;
     @FXML
-    private TextField txtXacnhanMK;
+    private PasswordField txtXacnhanMK;
     @FXML
     private Label lbThongbao1;
     @FXML
     private Label lbThongbao2;
+    @FXML
+    private Label lbMK;
 
     /**
      * Initializes the controller class.
@@ -49,7 +51,10 @@ public class DoimatkhauController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        txtBaoLoi.setFill(Color.RED);
+        txtBaoLoi.setTextFill(Color.RED);
+        lbThongbao1.setTextFill(Color.RED);
+        lbThongbao2.setTextFill(Color.RED);
+        lbMK.setTextFill(Color.RED);
     }    
 
     @FXML
@@ -63,34 +68,64 @@ public class DoimatkhauController implements Initializable {
         EightTeaApplication.alertInf(mk);
         
         txtBaoLoi.setText("");
+        lbThongbao1.setText("");
+        lbThongbao2.setText("");
+        lbMK.setText("");
         if(txtMKCu.getText().isEmpty() || txtMKMoi.getText().isEmpty() || txtXacnhanMK.getText().isEmpty())
         {
             txtBaoLoi.setText("Vui lòng nhập đầy đủ thông tin !!!");
         }
-//        else 
-//        {
-//            
-//            if(txtMKCu.getText().equals(nv.getMatKhau()))
-//            {
-//                if(txtMKMoi.getText().equals(txtXacnhanMK.getText()))
-//                {
-//                    if(new BUS_NhanVien().DoiMatKhau(EightTeaApplication.userhientai, txtMKMoi.getText()))
-//                    {
-//                        EightTeaApplication.alertInf("Đổi mật khẩu thành công !");
-//                        ReSet();
-//                    }
-//                    else
-//                    {
-//                        EightTeaApplication.alertInf("Thất bại !!!");
-//                    }
-//                }
-//                else 
-//                {
-//                    lbThongbao2.setText("Xác nhận mật khẩu mới KHÔNG KHỚP !!!");
-//                }
-//            }
-//            txtBaoLoi.setText("Mật khẩu cũ không đúng !!!");
-//        }
+        else 
+        {
+            
+            if(txtMKCu.getText().equals(mk))
+            {
+                
+            }
+            else{
+                lbMK.setText("Mật khẩu cũ không đúng !!!");
+            }
+            if(txtMKMoi.getText().matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"))
+                {
+                    
+                }
+                else
+                {
+                    lbThongbao1.setText("Mật khẩu mới không hợp lệ !!!");
+                }
+            if(txtMKCu.getText().equals(txtMKMoi.getText()))
+            {
+                
+                
+            }
+            else{
+                lbThongbao1.setText("Mật khẩu mới không được TRÙNG mật khẩu cũ");
+            }
+            
+            if(txtMKMoi.getText().equals(txtXacnhanMK.getText()) && lbMK.getText().isEmpty() 
+                    && lbThongbao1.getText().isEmpty() && lbThongbao2.getText().isEmpty() && txtBaoLoi.getText().isEmpty() )
+                    {
+                        boolean xn = EightTeaApplication.alertConf("Bạn có chắn muốn đổi mật khẩu !");
+                        if(xn == true)
+                        {
+                            if(new BUS_NhanVien().DoiMatKhau(EightTeaApplication.userhientai, txtMKMoi.getText()))
+                            {
+                                EightTeaApplication.alertInf("Đổi mật khẩu thành công !");
+                                ReSet();
+                            }
+                            else
+                            {
+                                EightTeaApplication.alertInf("Thất bại !!!");
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        lbThongbao2.setText("Xác nhận mật khẩu mới KHÔNG KHỚP !!!");
+                    }
+            
+            
+        }
     }
     
     public void ReSet()

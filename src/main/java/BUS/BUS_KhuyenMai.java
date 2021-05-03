@@ -88,4 +88,26 @@ public class BUS_KhuyenMai {
         }
         return false;
     }
+    
+    //    Hàm int (Truyền vào mã khuyến mãi, kiểm tra xem có hợp lệ ko, nếu có thì trả về giá trị %, nếu ko trả về 0)
+    public int PhanTramKM(String MaKM)
+    {
+        int km = 0;
+        String sql = "SELECT PhanTramKM from KHUYENMAI where MaKM = '"+MaKM+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                km += rs.getInt(1);
+            }
+            return km;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return km ;
+    }
+    
+
 }
