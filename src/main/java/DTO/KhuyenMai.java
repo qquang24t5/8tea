@@ -11,14 +11,14 @@ package DTO;
  */
 public class KhuyenMai {
     String MaKM ,TenKM , NgayBD , NgayKT ;
-    float PhanTramKM;
+    int PhanTramKM;
     String TrangThai ;
     
     public KhuyenMai()  {
         
     }
 
-    public KhuyenMai(String MaKM, String TenKM, String NgayBD, String NgayKT, float PhanTramKM, String TrangThai) {
+    public KhuyenMai(String MaKM, String TenKM, String NgayBD, String NgayKT, int PhanTramKM, String TrangThai) {
         this.MaKM = MaKM;
         this.TenKM = TenKM;
         this.NgayBD = NgayBD;
@@ -59,11 +59,11 @@ public class KhuyenMai {
         this.NgayKT = NgayKT;
     }
 
-    public float getPhanTramKM() {
+    public int getPhanTramKM() {
         return PhanTramKM;
     }
 
-    public void setPhanTramKM(float PhanTramKM) {
+    public void setPhanTramKM(int PhanTramKM) {
         this.PhanTramKM = PhanTramKM;
     }
 

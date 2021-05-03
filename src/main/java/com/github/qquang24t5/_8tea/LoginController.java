@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void dangnhap(ActionEvent event) throws IOException {
+    public void dangnhap(ActionEvent event) throws IOException {
 
         String manv = txtTaikhoan.getText();
         String pass = txtMatkhau.getText();
@@ -82,5 +82,6 @@ public class LoginController implements Initializable {
         lbLoi.setText("");
         lbLoi.setText(error);
     }
-
+    
+    
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="txt" prefHeight="509.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.qquang24t5._8tea.KhuyenmaiController">
+<AnchorPane id="AnchorPane" fx:id="txt" prefHeight="509.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.qquang24t5._8tea.KhuyenmaiController">
    <children>
       <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,14 +24,14 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <Text fx:id="txtBaoLoi" layoutX="89.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="268.0" />
-      <TableView layoutX="68.0" layoutY="16.0" prefHeight="480.0" prefWidth="541.0">
+      <Text fx:id="txtBaoLoi" layoutX="636.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="185.60000000000014" />
+      <TableView fx:id="tblKM" layoutX="68.0" layoutY="16.0" onMouseClicked="#getDuLieu" prefHeight="480.0" prefWidth="541.0">
         <columns>
-          <TableColumn prefWidth="115.66668701171875" text="Mã khuyến mãi" />
-          <TableColumn minWidth="0.0" prefWidth="113.0" text="Tên chương trình" />
-            <TableColumn prefWidth="113.66668701171875" text="Ngày bắt đầu" />
-            <TableColumn prefWidth="110.33331298828125" text="Ngày kết thúc" />
-            <TableColumn prefWidth="87.0" text="Phần trăm" />
+          <TableColumn fx:id="colMaKM" prefWidth="115.66668701171875" text="Mã khuyến mãi" />
+          <TableColumn fx:id="colTenKM" minWidth="0.0" prefWidth="113.0" text="Tên chương trình" />
+            <TableColumn fx:id="colNgayBD" prefWidth="113.66668701171875" text="Ngày bắt đầu" />
+            <TableColumn fx:id="colNgayKT" prefWidth="110.33331298828125" text="Ngày kết thúc" />
+            <TableColumn fx:id="colPhanTram" prefWidth="87.0" text="Phần trăm" />
         </columns>
       </TableView>
       <Label layoutX="634.0" layoutY="58.0" text="Mã khuyến mãi">
@@ -39,32 +39,32 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="634.0" layoutY="78.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtMaKM" layoutX="634.0" layoutY="78.0" prefHeight="25.0" prefWidth="186.0" />
       <Label layoutX="636.0" layoutY="111.0" text="Tên chương trình">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="636.0" layoutY="131.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtTenKM" layoutX="636.0" layoutY="131.0" prefHeight="25.0" prefWidth="186.0" />
       <Label layoutX="639.0" layoutY="170.0" text="Ngày bắt đầu">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker layoutX="637.0" layoutY="192.0" prefHeight="25.0" prefWidth="186.0" />
+      <DatePicker fx:id="txtNgayBD" layoutX="637.0" layoutY="192.0" prefHeight="25.0" prefWidth="186.0" />
       <Label layoutX="640.0" layoutY="226.0" text="Ngày kết thúc">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker layoutX="638.0" layoutY="248.0" prefHeight="25.0" prefWidth="186.0" />
+      <DatePicker fx:id="txtNgayKT" layoutX="638.0" layoutY="248.0" prefHeight="25.0" prefWidth="186.0" />
       <Label layoutX="638.0" layoutY="284.0" text="Phần trăm khuyến mãi">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="638.0" layoutY="304.0" prefHeight="25.0" prefWidth="186.0" />
-      <Button layoutX="638.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Tạo mới" />
-      <Button layoutX="638.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Xóa" />
+      <TextField fx:id="txtPhanTram" layoutX="638.0" layoutY="304.0" prefHeight="25.0" prefWidth="186.0" />
+      <Button layoutX="627.0" layoutY="436.0" mnemonicParsing="false" onAction="#themKM" prefHeight="25.0" prefWidth="95.0" text="Thêm" />
+      <Button layoutX="729.0" layoutY="436.0" mnemonicParsing="false" onAction="#xoaKM" prefHeight="25.0" prefWidth="95.0" text="Xóa" />
    </children>
 </AnchorPane>

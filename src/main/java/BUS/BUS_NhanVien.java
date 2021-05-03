@@ -187,7 +187,7 @@ public class BUS_NhanVien {
     }
     
     public boolean XoaNV(String MaNV)   {
-        String sql = "delete * from NhanVien where MaNV = '"+MaNV+"'";
+        String sql = "delete from NhanVien where MaNV = '"+MaNV+"'";
         try {
             PreparedStatement ps = dao.conn().prepareStatement(sql);
             ps.executeUpdate();
@@ -197,4 +197,24 @@ public class BUS_NhanVien {
         }
         return false;
     }
+    
+    public String MK(String MaNV)
+    {
+        String mk = "" ;
+        NhanVien nv = new NhanVien();
+        String sql = "select MATKHAU from nhanvien where MaNV = '"+MaNV+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            nv.setMatKhau(rs.getString(1));
+            return mk ;
+//            mk = (rs.getString("matkhau"));
+            
+            
+        } catch (Exception e) {
+        }
+        return mk;
+    }
+    
+    
 }
