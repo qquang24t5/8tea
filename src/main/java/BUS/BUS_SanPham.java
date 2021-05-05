@@ -118,5 +118,73 @@ public class BUS_SanPham {
         }
         return "Chưa có";
     }
-    
+    public ArrayList<SanPham> thongkeSP(String bd,String kt,String manv){
+        ArrayList<SanPham> list = new ArrayList<>();
+        String sql;
+        if(manv.equals("ALL")){
+            sql = "select sanpham.TENSP,sum(chitiethoadon.SOLUONG) as Tong from chitiethoadon,hoadon,sanpham\n" +
+"where hoadon.MAHD=chitiethoadon.MAHD and sanpham.MASP=chitiethoadon.MASP and STR_TO_DATE(hoadon.NGAYTAO,'%d/%m/%Y') BETWEEN STR_TO_DATE('"+bd+"','%d/%m/%Y') AND STR_TO_DATE('"+kt+"','%d/%m/%Y')\n" +
+"GROUP by sanpham.TENSP";
+        }
+        else{
+             sql = "select sanpham.TENSP,sum(chitiethoadon.SOLUONG) as Tong from chitiethoadon,hoadon,sanpham\n" +
+"where hoadon.MAHD=chitiethoadon.MAHD and hoadon.MANV='"+manv+"' and sanpham.MASP=chitiethoadon.MASP and STR_TO_DATE(hoadon.NGAYTAO,'%d/%m/%Y') BETWEEN STR_TO_DATE('"+bd+"','%d/%m/%Y') AND STR_TO_DATE('"+kt+"','%d/%m/%Y')\n" +
+"GROUP by sanpham.TENSP";
+        }
+        
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                SanPham sp = new SanPham();
+//                sp.setMaSP(rs.getString("MaSP"));
+                sp.setTenSP(rs.getString(1));
+                sp.setMaSP(rs.getString(2));
+//                sp.setMaLoaiSP(new BUS_PhanLoaiSP().layTenLoaiSP(rs.getString("MaLoaiSP")));
+                //sp.setSize(rs.getString("Size"));
+//                sp.setGiaBan(rs.getDouble("GiaBan"));
+                list.add(sp);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public ArrayList<SanPham> thongkeSP(String manv){
+        ArrayList<SanPham> list = new ArrayList<>();
+        String sql;
+        if(manv.equals("ALL")){
+             sql="select sanpham.TENSP,sum(chitiethoadon.SOLUONG) as Tong from chitiethoadon,hoadon,sanpham\n" +
+"where hoadon.MAHD=chitiethoadon.MAHD and sanpham.MASP=chitiethoadon.MASP \n" +
+"GROUP by sanpham.TENSP";
+        }else{
+            sql="select sanpham.TENSP,sum(chitiethoadon.SOLUONG) as Tong from chitiethoadon,hoadon,sanpham\n" +
+"where hoadon.MAHD=chitiethoadon.MAHD and hoadon.MANV='"+manv+"' and sanpham.MASP=chitiethoadon.MASP \n" +
+"GROUP by sanpham.TENSP";
+        }
+       
+       
+        
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                SanPham sp = new SanPham();
+//                sp.setMaSP(rs.getString("MaSP"));
+                sp.setTenSP(rs.getString(1));
+                sp.setMaSP(rs.getString(2));
+//                sp.setMaLoaiSP(new BUS_PhanLoaiSP().layTenLoaiSP(rs.getString("MaLoaiSP")));
+                //sp.setSize(rs.getString("Size"));
+//                sp.setGiaBan(rs.getDouble("GiaBan"));
+                list.add(sp);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

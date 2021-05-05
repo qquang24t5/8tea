@@ -215,6 +215,7 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    private void formTK(ActionEvent event) {
+    private void formTK(ActionEvent event) throws IOException {
+        EightTeaApplication.setRoot("thongke");
     }
 }

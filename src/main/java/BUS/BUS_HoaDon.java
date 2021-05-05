@@ -42,6 +42,28 @@ public class BUS_HoaDon {
         }
         return list;
     }
+    public ArrayList<HoaDon> getListHD(String manv) {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String sql = "SELECT hoadon.MAHD,nhanvien.HOTEN,hoadon.NGAYTAO,hoadon.MAKM,hoadon.TONGTIEN\n" +
+"FROM hoadon,nhanvien\n" +
+"where hoadon.MANV=nhanvien.MANV and hoadon.MANV='"+manv+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHD(rs.getString("MaHD"));
+                hd.setMaNV(rs.getString("HoTen"));
+                hd.setNgayTao(rs.getString("NgayTao"));
+                hd.setMaKM(rs.getString("MaKM"));
+                hd.setTongTien(rs.getDouble("TongTien"));
+                list.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public boolean ThemHD(HoaDon hd) {
         String sql = "insert into HoaDon(MaHD,MaNV,NgayTao,MaKM,TongTien) values(?,?,?,?,?)";
@@ -191,6 +213,30 @@ public class BUS_HoaDon {
         }
         return false;
     }
-   
+   public ArrayList<HoaDon> thongkeHD(String bd,String kt,String manv) {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String sql = "SELECT MAHD,STR_TO_DATE(NGAYTAO,'%d/%m/%Y') as NGAY,MAKM,TONGTIEN \n" +
+"from hoadon\n" +
+"where STR_TO_DATE(NGAYTAO,'%d/%m/%Y') BETWEEN STR_TO_DATE('"+bd+"','%d/%m/%Y') AND STR_TO_DATE('"+kt+"','%d/%m/%Y')";
+        if(!manv.equals("ALL")){
+            sql+=" AND MANV='"+manv+"'";
+        }
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHD(rs.getString(1));
+                hd.setNgayTao(rs.getString(2));
+                hd.setMaKM(rs.getString(3));
+                hd.setTongTien(rs.getDouble(4));
+                
+                list.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     
 }

@@ -218,6 +218,20 @@ public class BUS_NhanVien {
         }
         return mk;
     }
-    
+    public String MaNV(String TenNV)   {
+        String sql = "select MaNV from NhanVien where HoTen = N'"+TenNV+"'";
+        try {
+            PreparedStatement ps = dao.conn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                return rs.getString(1);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
 }
