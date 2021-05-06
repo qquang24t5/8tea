@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2021 at 10:32 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.2.32
+-- Generation Time: May 06, 2021 at 02:43 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -262,7 +263,7 @@ CREATE TABLE `nhanvien` (
   `SDT` varchar(255) NOT NULL,
   `NGAYSINH` varchar(30) NOT NULL,
   `MATKHAU` varchar(255) NOT NULL,
-  `TRANGTHAI` int(11) NOT NULL
+  `TRANGTHAI` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -270,9 +271,9 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`MANV`, `MACV`, `HOTEN`, `GIOITINH`, `SDT`, `NGAYSINH`, `MATKHAU`, `TRANGTHAI`) VALUES
-('231', 'thanos', 'Tuan', '0', '0123456389', '23/09/2000', 'clmm123456', 1),
-('LMAO', 'TP', 'Trường kute', '1', '0903615936', '24/08/2000', 'darkdark', 1),
-('siapa', 'TN', 'Trieu', '0', '0123456789', '27/02/2000', 'trieubaby', 1);
+('231', 'thanos', 'Tuan', '0', '0123456389', '23/09/2000', 'clmm123456', '1'),
+('LMAO', 'TP', 'Trường kute', '1', '0903615936', '24/08/2000', 'darkdark', '0'),
+('siapa', 'TN', 'Trieu', '0', '0123456789', '27/02/2000', 'trieubaby', '1');
 
 -- --------------------------------------------------------
 
