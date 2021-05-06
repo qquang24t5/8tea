@@ -12,7 +12,8 @@ package DTO;
 public class NhanVien {
     String MaNV , MaCV , HoTen  , SDT ,NgaySinh ,MatKhau ;
     String TrangThai,GioiTinh ;
-    
+    //Sai kiểu dữ liệu của trường trạng thái, trường trạng thái trong database
+    //có kiểu int, ở đây là kiểu String, khi test bị văng lỗi exception
     public NhanVien()   {
         
     }

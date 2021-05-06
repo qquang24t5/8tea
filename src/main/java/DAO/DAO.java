@@ -27,8 +27,8 @@ public class DAO {
     {
          Connection conn = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/eitea","root","");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/eitea","root","@$MinhKhang0715");
 //            System.out.println("connect successfully!");
         } catch (Exception ex) {
             System.out.println("connect failure!");
@@ -40,7 +40,7 @@ public class DAO {
         //ArrayList<TaiKhoan> list = new ArrayList<>();
         String sql = "select * from NhanVien where MaNV= '"+MaNV+"' and MatKhau='"+MatKhau+"'";
         try {
-            Connection dmm = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/eitea","root","");
+            Connection dmm = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/eitea","root","@$MinhKhang0715");
             PreparedStatement ps = dmm.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next())

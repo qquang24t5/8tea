@@ -73,4 +73,37 @@ public class AppTest extends ApplicationTest {
         String errorMsg = lookup("#lbLoi").queryAs(Text.class).getText();
         MatcherAssert.assertThat(errorMsg, is("Hãy nhập đẩy đủ thông tin !"));
     }
+
+    @Test
+    public void testWrongPassword() {
+        clickOn("#txtTaikhoan");
+        write("231");
+        clickOn("#txtMatkhau");
+        write("223432");
+        clickOn("#button");
+        String errorMsg = lookup("#lbLoi").queryAs(Text.class).getText();
+        MatcherAssert.assertThat(errorMsg, is("Sai tài khoản hoặc mật khẩu"));
+    }
+
+    @Test
+    public void testWrongAccount() {
+        clickOn("#txtTaikhoan");
+        write("fdsbtewy");
+        clickOn("#txtMatkhau");
+        write("uhoghob");
+        clickOn("#button");
+        String errorMsg = lookup("#lbLoi").queryAs(Text.class).getText();
+        MatcherAssert.assertThat(errorMsg, is("Sai tài khoản hoặc mật khẩu"));
+    }
+
+//    @Test
+//    public void successful() {
+//        clickOn("#txtTaikhoan");
+//        write("231");
+//        clickOn("#txtMatkhau");
+//        write("clmm123456");
+//        clickOn("#button");
+//        String msg = lookup("#lbLoi").queryAs(Text.class).getText();
+//        MatcherAssert.assertThat(msg, is("Đăng nhập thành công"));
+//    }
 }

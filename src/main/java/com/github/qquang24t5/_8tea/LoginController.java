@@ -65,6 +65,7 @@ public class LoginController implements Initializable {
                 if (check.equals("LOCK")) {
                     setError("Tài khoản này hiện đang bị khóa");
                 } else if (check.equals(manv)) {
+                    setError("Đăng nhập thành công");
                     EightTeaApplication.userhientai = check;
                     EightTeaApplication.setRoot("home");
                 }
