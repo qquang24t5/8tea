@@ -10,6 +10,7 @@ import BUS.BUS_ChucVu;
 import BUS.BUS_Quyen_ChucNang;
 import DTO.ChucNang;
 import DTO.ChucVu;
+import DTO.Quyen_ChucNang;
 import com.github.qquang24t5._8tea.EightTeaApplication;
 import java.io.IOException;
 import java.net.URL;
@@ -65,7 +66,7 @@ public class ChucvuController implements Initializable {
         ArrayList<ChucNang> listcn = new BUS_ChucNang().getListCN();
         CheckBox[] list = new CheckBox[listcn.size()];
     public void setDSQuyen() {
-       
+        vbox.getChildren().clear();
         int i = 0;
         for (ChucNang cn : listcn) {
             list[i] = new CheckBox(cn.getTenCN());
@@ -123,6 +124,27 @@ public class ChucvuController implements Initializable {
 
     @FXML
     private void suaCV(ActionEvent event) {
+        if(EightTeaApplication.alertConf("Xác nhận thay đổi quyền của chức vụ ?")){
+            String ma = tblChucvu.getSelectionModel().getSelectedItem().getMaCV();
+         if(new BUS_Quyen_ChucNang().XoaQCN(ma)){
+             for(int i=0;i<listcn.size();i++){
+             if(list[i].isSelected()){
+                Quyen_ChucNang qcn = new Quyen_ChucNang();
+                qcn.setMaCN(new BUS_ChucNang().maCN(list[i].getText()));
+                qcn.setMaCV(ma);
+                if(new BUS_Quyen_ChucNang().ThemQCN(qcn)){
+                    
+                }
+             }
+         }
+             EightTeaApplication.alertInf("Đã sửa chức vụ");
+             setDSQuyen();
+             setTableCV();
+         }
+        }
+         
+         
+        
     }
 
     @FXML
@@ -135,6 +157,7 @@ public class ChucvuController implements Initializable {
                     if (new BUS_ChucVu().XoaCV(cv.getMaCV())) {
                     EightTeaApplication.alertInf("Đã xóa chức vụ");
                     setTableCV();
+                    setDSQuyen();
                 }
                 }
                 
