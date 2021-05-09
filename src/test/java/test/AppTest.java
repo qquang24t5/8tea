@@ -96,14 +96,14 @@ public class AppTest extends ApplicationTest {
         MatcherAssert.assertThat(errorMsg, is("Sai tài khoản hoặc mật khẩu"));
     }
 
-//    @Test
-//    public void successful() {
-//        clickOn("#txtTaikhoan");
-//        write("231");
-//        clickOn("#txtMatkhau");
-//        write("clmm123456");
-//        clickOn("#button");
-//        String msg = lookup("#lbLoi").queryAs(Text.class).getText();
-//        MatcherAssert.assertThat(msg, is("Đăng nhập thành công"));
-//    }
+    @Test
+    public void successful() {
+        clickOn("#txtTaikhoan");
+        write("231");
+        clickOn("#txtMatkhau");
+        write("clmm123456");
+        clickOn("#button");
+        String msg = lookup("#lbLoi").queryAs(Text.class).getText();
+        MatcherAssert.assertThat(msg, is("Đăng nhập thành công"));
+    }
 }

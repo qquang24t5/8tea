@@ -153,7 +153,7 @@ public class BUS_NhanVien {
             {
                 ps.setInt(8,1);
             }
-            else ps.setInt(8,2);
+            //else ps.setInt(8,2);
                 
             }
             

@@ -198,7 +198,7 @@ public class NhanvienController implements Initializable {
         nv.setHoTen(txtHoTen.getText());
         nv.setSDT(txtSDT.getText());
         nv.setNgaySinh(ns.format(formatter));
-        nv.setTrangThai(String.valueOf(cmTrangthai.getSelectionModel().getSelectedItem()));
+        nv.setTrangThai(String.valueOf(cmTrangthai.getSelectionModel().getSelectedItem().toString()));
         if(String.valueOf(cbChucvu.getSelectionModel().getSelectedItem()).equals("Chưa có"))
         {
             nv.setMaCV("TT");

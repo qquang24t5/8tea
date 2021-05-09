@@ -32,8 +32,11 @@ public class EightTeaApplication extends Application {
 
     public static void setRoot(String fxml) throws IOException {
 
-        scene.setRoot(loadFXML(fxml));
-
+        try {
+            scene.setRoot(loadFXML(fxml));
+        } catch (NullPointerException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

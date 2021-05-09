@@ -14,8 +14,15 @@ public class NhanVien {
     String TrangThai,GioiTinh ;
     //Sai kiểu dữ liệu của trường trạng thái, trường trạng thái trong database
     //có kiểu int, ở đây là kiểu String, khi test bị văng lỗi exception
-    public NhanVien()   {
-        
+    public NhanVien() {
+        this.GioiTinh="";
+        this.HoTen="";
+        this.MaCV="";
+        this.TrangThai="";
+        this.SDT="";
+        this.NgaySinh="";
+        this.MaNV="";
+        this.MatKhau="";
     }
 
     public NhanVien(String MaNV, String MaCV, String HoTen, String GioiTinh, String SDT, String NgaySinh, String MatKhau, String TrangThai) {
