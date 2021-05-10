@@ -119,7 +119,7 @@ public class BUS_ChucNang {
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                return rs.getString("TenCN");
+                return rs.getString(1);
             }
             
         } catch (Exception e) {

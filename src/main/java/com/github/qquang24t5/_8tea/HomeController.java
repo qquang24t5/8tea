@@ -12,6 +12,8 @@ import DTO.NhanVien;
 import com.github.qquang24t5._8tea.EightTeaApplication;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -52,8 +54,6 @@ public class HomeController implements Initializable {
     @FXML
     private Button btnPLSP;
     @FXML
-    private Label txtPer1;
-    @FXML
     private Button btnKM;
     @FXML
     private Button btnNH;
@@ -61,13 +61,15 @@ public class HomeController implements Initializable {
     private VBox vboxtest;
     @FXML
     private Button btnThongKe;
+    @FXML
+    private Label lbNgay;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        testButton();
+       
         setHome();
         setDSQuyen();
     }
@@ -93,6 +95,9 @@ public class HomeController implements Initializable {
 
     public void setHome() {
         NhanVien cu = new BUS_NhanVien().TimNV(EightTeaApplication.userhientai);
+        LocalDate td = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        lbNgay.setText(td.format(formatter));
         txtName.setText(cu.getHoTen());
         txtPer.setText(new BUS_ChucVu().tenCV(cu.getMaCV()));
     }
@@ -198,21 +203,7 @@ public class HomeController implements Initializable {
         EightTeaApplication.setRoot("doimatkhau");
     }
 
-    public void testButton() {
-        Button[] btn = new Button[8];
-        for (int i = 0; i < btn.length; i++) {
-            btn[i] = new Button("Number " + (i + 1));
-            
-            btn[i].setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    String text = ((Button)e.getSource()).getText();
-                    EightTeaApplication.alertInf("day la so "+text);
-                }
-            });
-            vboxtest.getChildren().add(btn[i]);
-        }
-    }
+   
 
     @FXML
     private void formTK(ActionEvent event) throws IOException {

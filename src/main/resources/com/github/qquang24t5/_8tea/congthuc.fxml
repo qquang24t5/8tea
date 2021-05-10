@@ -58,10 +58,6 @@
             <TableColumn fx:id="colSL" prefWidth="136.0" text="Số lượng" />
          </columns>
       </TableView>
-      <Text fx:id="txtMaSPAN" fill="#249841" layoutX="355.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
+      <Text fx:id="txtMaSPAN" layoutX="358.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" />
    </children>
 </AnchorPane>

@@ -46,6 +46,8 @@ public class ChucvuController implements Initializable {
     private TableColumn<ChucVu, String> colMaCV;
     @FXML
     private TableColumn<ChucVu, String> colTenCV;
+    BUS_Quyen_ChucNang bqs = new BUS_Quyen_ChucNang();
+    BUS_ChucNang bcn = new BUS_ChucNang();
 
     /**
      * Initializes the controller class.
@@ -63,7 +65,7 @@ public class ChucvuController implements Initializable {
     }
 
     
-        ArrayList<ChucNang> listcn = new BUS_ChucNang().getListCN();
+        ArrayList<ChucNang> listcn = bcn.getListCN();
         CheckBox[] list = new CheckBox[listcn.size()];
     public void setDSQuyen() {
         vbox.getChildren().clear();
@@ -88,7 +90,7 @@ public class ChucvuController implements Initializable {
 
         tblChucvu.setItems(li);
     }
-
+    
     @FXML
     private void getDuLieu(MouseEvent event) {
          for(int i=0;i<list.length;i++)
@@ -96,17 +98,28 @@ public class ChucvuController implements Initializable {
                 list[i].setSelected(false);
             }
         ChucVu cv = tblChucvu.getSelectionModel().getSelectedItem();
-        BUS_Quyen_ChucNang bqs = new BUS_Quyen_ChucNang();
+        
         ArrayList<String> listquyen = bqs.getListQCN(cv.getMaCV());
-        String sc="";
+       
+//        for(String s : listquyen){
+//            sc+=s;
+//        }
+        ArrayList<String> listq2 = new ArrayList<>();
+        for(String s : listquyen){
+            listq2.add(bcn.tenCN(s));
+           
+        }
+       
+        
         
             for(int i=0;i<list.length;i++)
             {
-                for(String s:listquyen)
+                for(String s:listq2)
                 {
-                    if(list[i].getText().equals(new BUS_ChucNang().tenCN(s)))
+                    if(list[i].getText().equals(s))
                     {
                         list[i].setSelected(true);
+                        break;
                     }
                 }
             }
@@ -126,13 +139,13 @@ public class ChucvuController implements Initializable {
     private void suaCV(ActionEvent event) {
         if(EightTeaApplication.alertConf("Xác nhận thay đổi quyền của chức vụ ?")){
             String ma = tblChucvu.getSelectionModel().getSelectedItem().getMaCV();
-         if(new BUS_Quyen_ChucNang().XoaQCN(ma)){
+         if(bqs.XoaQCN(ma)){
              for(int i=0;i<listcn.size();i++){
              if(list[i].isSelected()){
                 Quyen_ChucNang qcn = new Quyen_ChucNang();
-                qcn.setMaCN(new BUS_ChucNang().maCN(list[i].getText()));
+                qcn.setMaCN(bcn.maCN(list[i].getText()));
                 qcn.setMaCV(ma);
-                if(new BUS_Quyen_ChucNang().ThemQCN(qcn)){
+                if(bqs.ThemQCN(qcn)){
                     
                 }
              }
@@ -151,7 +164,7 @@ public class ChucvuController implements Initializable {
     private void xoaCV(ActionEvent event) {
         ChucVu cv = tblChucvu.getSelectionModel().getSelectedItem();
         if (EightTeaApplication.alertConf("Bạn có chắc chắn muốn xóa chức vụ này ?")) {
-            if (new BUS_Quyen_ChucNang().XoaQCN(cv.getMaCV())) {
+            if (bqs.XoaQCN(cv.getMaCV())) {
                 if(new BUS_ChucVu().setTrongCVNV(cv.getMaCV()))
                 {
                     if (new BUS_ChucVu().XoaCV(cv.getMaCV())) {
